@@ -27,7 +27,11 @@ namespace TravelMeaning.BLL
 
         public async Task<bool> Regiseter(string username, string password, string phoneNumber)
         {
-            var user = await base.GetAll().FirstAsync(m => m.Username == username);
+            var user = await base.GetAll().Where(m => m.Username == username).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                return false;
+            }
             var newUser = new User
             {
                 Username = username,

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.BLL", "Travel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.IBLL", "TravelMeaning.IBLL\TravelMeaning.IBLL.csproj", "{55B6E68F-0562-47F0-9E4B-4526F41B65D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.Test", "TravelMeaning.Test\TravelMeaning.Test.csproj", "{AE394F36-2E45-4F31-A117-C1063F3AC9B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
