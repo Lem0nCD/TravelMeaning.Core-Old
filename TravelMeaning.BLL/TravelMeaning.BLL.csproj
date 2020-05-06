@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TravelMeaning.DAL\TravelMeaning.DAL.csproj" />
+    <ProjectReference Include="..\TravelMeaning.IBLL\TravelMeaning.IBLL.csproj" />
+    <ProjectReference Include="..\TravelMeaning.Models\TravelMeaning.Models.csproj" />
+  </ItemGroup>
+
+</Project>

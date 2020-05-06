@@ -5,7 +5,15 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Models", "TravelMeaning.Models\TravelMeaning.Models.csproj", "{C1AC21A6-2D76-4F22-9417-6BCE48CB387C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.Web", "TravelMeaning.Web\TravelMeaning.Web.csproj", "{45D843CE-9536-433B-99B5-830A0E1A6767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Web", "TravelMeaning.Web\TravelMeaning.Web.csproj", "{45D843CE-9536-433B-99B5-830A0E1A6767}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.IDAL", "TravelMeaning.IDAL\TravelMeaning.IDAL.csproj", "{D4B7294F-C519-4F81-8082-4E5C02E2D609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.DAL", "TravelMeaning.DAL\TravelMeaning.DAL.csproj", "{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.BLL", "TravelMeaning.BLL\TravelMeaning.BLL.csproj", "{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.IBLL", "TravelMeaning.IBLL\TravelMeaning.IBLL.csproj", "{55B6E68F-0562-47F0-9E4B-4526F41B65D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{45D843CE-9536-433B-99B5-830A0E1A6767}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45D843CE-9536-433B-99B5-830A0E1A6767}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45D843CE-9536-433B-99B5-830A0E1A6767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B7294F-C519-4F81-8082-4E5C02E2D609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B7294F-C519-4F81-8082-4E5C02E2D609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B7294F-C519-4F81-8082-4E5C02E2D609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B7294F-C519-4F81-8082-4E5C02E2D609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B6E68F-0562-47F0-9E4B-4526F41B65D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
