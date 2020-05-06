@@ -17,12 +17,15 @@ namespace TravelMeaning.Models.Data
             modelBuilder.Entity<BindingTypeUser>(x =>
             { 
                 x.HasOne(x => x.User).WithMany(x => x.Bindings).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
+                x.Property(x => x.Type).IsRequired();
             });
 
             modelBuilder.Entity<ChatMessage>(x =>
             {
                 x.HasOne(x => x.Conversation).WithMany(x => x.ChatMessages).HasForeignKey(x => x.ConversationId).OnDelete(DeleteBehavior.Restrict);
-                x.Property(x => x.Content).HasColumnType("nvarchar(100)");
+                x.Property(x => x.Content).HasColumnType("nvarchar(100)").IsRequired();
+                x.Property(x => x.Type).IsRequired();
+                x.Property(x => x.IsRead).IsRequired();
             });
 
             modelBuilder.Entity<Comment>(x =>
@@ -36,6 +39,7 @@ namespace TravelMeaning.Models.Data
             {
                 x.HasOne(x => x.Comment).WithOne(x => x.CommentReview).HasForeignKey<CommentReview>(x => x.CommentId).OnDelete(DeleteBehavior.Restrict);
                 x.Property(x => x.Note).HasColumnType("nvarchar(100)");
+                x.Property(x => x.State).IsRequired();
             });
 
             modelBuilder.Entity<Conversation>(x =>
@@ -53,7 +57,8 @@ namespace TravelMeaning.Models.Data
             {
                 x.HasOne(x => x.ToUser).WithMany(x => x.ToUserMessages).HasForeignKey(x => x.ToUserId).OnDelete(DeleteBehavior.Restrict);
                 x.HasOne(x => x.FromUser).WithMany(x => x.FromUserMessages).HasForeignKey(x => x.FromUserId).OnDelete(DeleteBehavior.Restrict);
-                x.Property(x => x.Content).HasColumnType("nvarchar(1000)");
+                x.Property(x => x.Content).HasColumnType("nvarchar(1000)").IsRequired();
+                x.Property(x => x.Type).IsRequired();
             });
 
             modelBuilder.Entity<RelationShip>(x =>
@@ -71,8 +76,8 @@ namespace TravelMeaning.Models.Data
             modelBuilder.Entity<TravelGuide>(x =>
             {
                 x.HasOne(x => x.User).WithMany(x => x.TravelGuides).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
-                x.Property(x => x.Title).HasColumnType("nvarchar(30)");
-                x.Property(x => x.Content).HasColumnType("nvarchar(max)");
+                x.Property(x => x.Title).HasColumnType("nvarchar(30)").IsRequired();
+                x.Property(x => x.Content).HasColumnType("nvarchar(max)").IsRequired();
                 x.Property(x => x.CoverImage).HasColumnType("nvarchar(1000)");
             });
 
@@ -84,12 +89,12 @@ namespace TravelMeaning.Models.Data
 
             modelBuilder.Entity<User>(x =>
             {
-                x.Property(x => x.Username).HasColumnType("nvarchar(10)");
-                x.Property(x => x.Password).HasColumnType("nvarchar(20)");
+                x.Property(x => x.Username).HasColumnType("nvarchar(10)").IsRequired();
+                x.Property(x => x.Password).HasColumnType("nvarchar(20)").IsRequired();
                 x.Property(x => x.Avatar).HasColumnType("nvarchar(100)");
                 x.Property(x => x.Location).HasColumnType("nvarchar(100)");
                 x.Property(x => x.Occupation).HasColumnType("nvarchar(100)");
-                x.Property(x => x.PhoneNumber).HasColumnType("nvarchar(100)");
+                x.Property(x => x.PhoneNumber).HasColumnType("nvarchar(100)").IsRequired();
             });
 
             modelBuilder.Entity<UserRole>(x =>

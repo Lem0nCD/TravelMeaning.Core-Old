@@ -26,7 +26,7 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 点赞数
         /// </summary>
-        public int UpVoteCount { get; set; }
+        public int UpVoteCount { get; set; } = 0;
         /// <summary>
         /// 回复评论Id
         /// </summary>

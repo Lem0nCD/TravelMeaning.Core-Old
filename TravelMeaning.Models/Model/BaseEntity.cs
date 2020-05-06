@@ -22,6 +22,6 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 删除标记
         /// </summary>
-        public bool IsRemove { get; set; }
+        public bool IsRemove { get; set; } = false;
     }
 }

@@ -29,11 +29,11 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 点赞数
         /// </summary>
-        public int UpVoteCount { get; set; }
+        public int UpVoteCount { get; set; } = 0;
         /// <summary>
         /// 查看数
         /// </summary>
-        public int ViewedCount { get; set; }
+        public int ViewedCount { get; set; } = 0;
         public ICollection<Comment> Comments { get; set; }
         public TravelGuideReview TravelGuideReview { get; set; }
     }

@@ -27,6 +27,6 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 查看标记
         /// </summary>
-        public bool IsRead { get; set; }
+        public bool IsRead { get; set; } = false;
     }
 }
