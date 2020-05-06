@@ -14,6 +14,10 @@ namespace TravelMeaning.Models.Model
         /// </summary>
         public string Username { get; set; }
         /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
         /// 头像
         /// </summary>
         public string Avatar { get; set; } = "Default";
