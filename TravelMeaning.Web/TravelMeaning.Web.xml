@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TravelMeaning.Web</name>
+    </assembly>
+    <members>
+        <member name="M:TravelMeaning.Web.Controllers.WeatherForecastController.Get">
+            <summary>
+            Get All WeatherForecast
+            </summary>
+            <returns>return Array</returns>
+        </member>
+    </members>
+</doc>

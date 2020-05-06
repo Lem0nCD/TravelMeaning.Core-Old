@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TravelMeaning.Models.Model;
 
 namespace TravelMeaning.Web.Controllers
 {
@@ -22,7 +23,10 @@ namespace TravelMeaning.Web.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// Get All WeatherForecast
+        /// </summary>
+        /// <returns>return Array</returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -34,6 +38,11 @@ namespace TravelMeaning.Web.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+        [HttpPost]
+        public IActionResult TestAnnoation(User user)
+        {
+            return Ok();
         }
     }
 }

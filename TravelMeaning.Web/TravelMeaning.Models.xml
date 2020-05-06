@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TravelMeaning.Models</name>
+    </assembly>
+    <members>
+        <member name="T:TravelMeaning.Models.Model.BaseEntity">
+            <summary>
+            基础实体
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.BaseEntity.Id">
+            <summary>
+            主键ID号
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.BaseEntity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.BaseEntity.UpdateTime">
+            <summary>
+            最后更新时间
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.BaseEntity.IsRemove">
+            <summary>
+            删除标记
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.BindingTypeUser">
+            <summary>
+            绑定类型-用户
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.BindingTypeUser.UserId">
+            <summary>
+            用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.BindingTypeUser.Type">
+            <summary>
+            绑定类型
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.ChatMessage.ConversationId">
+            <summary>
+            会话外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.ChatMessage.UserId">
+            <summary>
+            发送消息用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.ChatMessage.Content">
+            <summary>
+            消息正文
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.ChatMessage.Type">
+            <summary>
+            正文类型
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.ChatMessage.IsRead">
+            <summary>
+            查看标记
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.Comment">
+            <summary>
+            评论
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Comment.UserId">
+            <summary>
+            发表人外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Comment.TravelGuideId">
+            <summary>
+            旅游攻略外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Comment.Content">
+            <summary>
+            评论正文
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Comment.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Comment.ReplyCommentId">
+            <summary>
+            回复评论Id
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.CommentReview">
+            <summary>
+            评论审核
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.CommentReview.CommentId">
+            <summary>
+            评论外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.CommentReview.State">
+            <summary>
+            审核状态
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.CommentReview.Note">
+            <summary>
+            审核信息
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Conversation.User1Id">
+            <summary>
+            用户1外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Conversation.User2Id">
+            <summary>
+            用户1外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Conversation.IsShow">
+            <summary>
+            显示标记
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.BindingType">
+            <summary>
+            第三方绑定类型
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.ContentType">
+            <summary>
+            正文类型
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.ReviewState">
+            <summary>
+            审核状态
+            </summary>
+        </member>
+        <member name="F:TravelMeaning.Models.Model.ReviewState.InReview">
+            <summary>
+            审核中
+            </summary>
+        </member>
+        <member name="F:TravelMeaning.Models.Model.ReviewState.NotApproved">
+            <summary>
+            未通过
+            </summary>
+        </member>
+        <member name="F:TravelMeaning.Models.Model.ReviewState.Approved">
+            <summary>
+            已通过
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.Favorite">
+            <summary>
+            收藏旅游指南
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Favorite.UserId">
+            <summary>
+            用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Favorite.TravelGuideId">
+            <summary>
+            旅游指南外键
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Message.ToUserId">
+            <summary>
+            接收消息用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Message.FromUserId">
+            <summary>
+            发送消息用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Message.Content">
+            <summary>
+            消息正文
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Message.Type">
+            <summary>
+            正文类型
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Message.IsRead">
+            <summary>
+            查看标记
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Message.IsShow">
+            <summary>
+            显示标记
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.RelationShip">
+            <summary>
+            好友关系
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.RelationShip.ToUserId">
+            <summary>
+            接收消息用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.RelationShip.FromUserId">
+            <summary>
+            发送消息用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.RelationShip.ToUserType">
+            <summary>
+            添加者关系类型
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.RelationShip.FromUserType">
+            <summary>
+            被添加者关系类型
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.Role">
+            <summary>
+            权限
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Role.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.Role.Description">
+             <summary>
+            描述
+             </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.TravelGuide">
+            <summary>
+            旅游指南
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuide.UserId">
+            <summary>
+            作者外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuide.Content">
+            <summary>
+            正文 富文本
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuide.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuide.CoverImage">
+            <summary>
+            封面图片
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuide.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuide.ViewedCount">
+            <summary>
+            查看数
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.TravelGuideReview">
+            <summary>
+            旅游指南审核
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuideReview.TravelGuideId">
+            <summary>
+            旅游指南外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuideReview.State">
+            <summary>
+            审核状态
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.TravelGuideReview.Note">
+            <summary>
+            审核信息
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.User">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.Location">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.Occupation">
+            <summary>
+            职业
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.UId">
+            <summary>
+            用户号(非ID)
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.PhoneNumber">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.User.Gender">
+            <summary>
+            性别 female 1,male 2
+            </summary>
+        </member>
+        <member name="T:TravelMeaning.Models.Model.UserRole">
+            <summary>
+            用户权限
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.UserRole.UserId">
+            <summary>
+            用户外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.Model.UserRole.RoleId">
+            <summary>
+            权限外键
+            </summary>
+        </member>
+    </members>
+</doc>
