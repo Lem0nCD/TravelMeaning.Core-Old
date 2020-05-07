@@ -4,6 +4,34 @@
         <name>TravelMeaning.Web</name>
     </assembly>
     <members>
+        <member name="T:TravelMeaning.Web.Auth.CustomPayloadModel">
+            <summary>
+            令牌自定义信息
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Web.Auth.CustomPayloadModel.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Web.Auth.CustomPayloadModel.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Web.Auth.CustomPayloadModel.Work">
+            <summary>
+            职能
+            </summary>
+        </member>
+        <member name="M:TravelMeaning.Web.Controllers.TestController.GetJwtStr(System.String,System.String)">
+            <summary>
+            获取Jwt串
+            </summary>
+            <param name="name"></param>
+            <param name="pass"></param>
+            <returns></returns>
+        </member>
         <member name="M:TravelMeaning.Web.Controllers.WeatherForecastController.Get">
             <summary>
             Get All WeatherForecast

@@ -1,21 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using TravelMeaning.Models.Data;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using Microsoft.DotNet.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Filters;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Threading.Tasks;
 
 namespace TravelMeaning.Web
 {
@@ -73,6 +72,44 @@ namespace TravelMeaning.Web
                 });
             });
             #endregion
+            #region Authorization
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
+            });
+            #endregion
+            #region Custom Authentication
+            var audienceConfig = Configuration.GetSection("Audience");
+            var symmetricKeyAsbase64 = audienceConfig["Secret"];
+            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsbase64);
+            var signingKey = new SymmetricSecurityKey(keyByteArray);
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+                ValidIssuer = audienceConfig["Issuer"],
+                ValidateAudience = true,
+                ValidAudience = audienceConfig["Audience"],
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.FromSeconds(30),
+                RequireExpirationTime = true,
+            };
+            services.AddAuthentication("Bearer").AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = tokenValidationParameters;
+                o.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                        {
+                            context.Response.Headers.Add("Token-Expired", "True");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,18 +119,24 @@ namespace TravelMeaning.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages();
+            #region Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/V1/swagger.json", "TravelMeaning API V1");
+                //c.RoutePrefix = string.Empty;
             });
             app.UseRouting();
-
+            #endregion
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors("LimitRquest");
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(name : "default",pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
 

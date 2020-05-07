@@ -7,15 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Models", "Tra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Web", "TravelMeaning.Web\TravelMeaning.Web.csproj", "{45D843CE-9536-433B-99B5-830A0E1A6767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.IDAL", "TravelMeaning.IDAL\TravelMeaning.IDAL.csproj", "{D4B7294F-C519-4F81-8082-4E5C02E2D609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.IDAL", "TravelMeaning.IDAL\TravelMeaning.IDAL.csproj", "{D4B7294F-C519-4F81-8082-4E5C02E2D609}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.DAL", "TravelMeaning.DAL\TravelMeaning.DAL.csproj", "{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.DAL", "TravelMeaning.DAL\TravelMeaning.DAL.csproj", "{3BD45BFD-2B4E-4663-AFC4-B8013E8ACCDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.BLL", "TravelMeaning.BLL\TravelMeaning.BLL.csproj", "{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.BLL", "TravelMeaning.BLL\TravelMeaning.BLL.csproj", "{C1189BC3-BF6A-4419-9B9A-A5600E4253F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.IBLL", "TravelMeaning.IBLL\TravelMeaning.IBLL.csproj", "{55B6E68F-0562-47F0-9E4B-4526F41B65D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.IBLL", "TravelMeaning.IBLL\TravelMeaning.IBLL.csproj", "{55B6E68F-0562-47F0-9E4B-4526F41B65D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.Test", "TravelMeaning.Test\TravelMeaning.Test.csproj", "{AE394F36-2E45-4F31-A117-C1063F3AC9B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Test", "TravelMeaning.Test\TravelMeaning.Test.csproj", "{AE394F36-2E45-4F31-A117-C1063F3AC9B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.Common", "TravelMeaning.Common\TravelMeaning.Common.csproj", "{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE394F36-2E45-4F31-A117-C1063F3AC9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
