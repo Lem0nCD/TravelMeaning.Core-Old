@@ -4,7 +4,7 @@ using TravelMeaning.DAL;
 using TravelMeaning.IBLL;
 using TravelMeaning.IDAL;
 
-namespace TravelMeaning.Web.IOCRegister
+namespace TravelMeaning.Web.Extensions
 {
     public static class IOCRegister
     {

@@ -33,7 +33,7 @@ namespace TravelMeaning.Web.Controllers
                 Code = StateCode.Illegal,
                 Data = new LogInModel()
             };
-            var roles = _userManager.
+
             if (user !=null)
             {
                 CustomPayloadModel tokenModel = new CustomPayloadModel

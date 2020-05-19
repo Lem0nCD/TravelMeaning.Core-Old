@@ -19,7 +19,7 @@ using TravelMeaning.DAL;
 using TravelMeaning.IDAL;
 using TravelMeaning.BLL;
 using TravelMeaning.IBLL;
-using TravelMeaning.Web.IOCRegister;
+using TravelMeaning.Web.Extensions;
 
 namespace TravelMeaning.Web
 {

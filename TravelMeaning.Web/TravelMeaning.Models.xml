@@ -4,6 +4,46 @@
         <name>TravelMeaning.Models</name>
     </assembly>
     <members>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Location">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Occupation">
+            <summary>
+            职业
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.UId">
+            <summary>
+            用户号(非ID)
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.PhoneNumber">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Role">
+            <summary>
+            用户角色
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Gender">
+            <summary>
+            性别 female 1,male 2
+            </summary>
+        </member>
         <member name="T:TravelMeaning.Models.Model.BaseEntity">
             <summary>
             基础实体

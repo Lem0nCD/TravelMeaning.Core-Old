@@ -26,7 +26,7 @@ namespace TravelMeaning.Web.Controllers
             CustomPayloadModel tokenModel = new CustomPayloadModel
             {
                 Id = Guid.NewGuid(),
-                Role = "Admin"
+                Roles = "Admin"
             };
             var jwtStr = JWTHelper.IssueJWT(tokenModel);
             var suc = true;

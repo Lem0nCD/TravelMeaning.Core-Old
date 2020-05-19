@@ -14,9 +14,9 @@
             Id
             </summary>
         </member>
-        <member name="P:TravelMeaning.Web.Auth.CustomPayloadModel.Role">
+        <member name="P:TravelMeaning.Web.Auth.CustomPayloadModel.Roles">
             <summary>
-            角色
+            角色集合，逗号分隔
             </summary>
         </member>
         <member name="P:TravelMeaning.Web.Auth.CustomPayloadModel.Work">

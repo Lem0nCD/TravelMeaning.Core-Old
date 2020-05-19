@@ -99,7 +99,7 @@ namespace TravelMeaning.Models.Data
 
             modelBuilder.Entity<UserRole>(x =>
             {
-                x.HasOne(x => x.User).WithOne(x => x.UserRole).HasForeignKey<UserRole>(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
+                x.HasOne(x => x.User).WithMany(x => x.UserRole).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
             });
 
         }

@@ -27,7 +27,7 @@ namespace TravelMeaning.Web.Auth
                 new Claim(JwtRegisteredClaimNames.Iss,iss),
                 new Claim(JwtRegisteredClaimNames.Aud,aud),
             };
-            claims.AddRange(model.Role.Split(',').Select(s => new Claim(ClaimTypes.Role, s)));
+            claims.AddRange(model.Roles.Split(',').Select(s => new Claim(ClaimTypes.Role, s)));
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var jwt = new JwtSecurityToken(
@@ -58,7 +58,7 @@ namespace TravelMeaning.Web.Auth
             var model = new CustomPayloadModel
             {
                 Id = Id,
-                Role = role != null ? role.ToString() : string.Empty,
+                Roles = role != null ? role.ToString() : string.Empty,
             };
             return model;
         }

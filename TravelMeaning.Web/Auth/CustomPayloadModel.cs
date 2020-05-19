@@ -15,9 +15,9 @@ namespace TravelMeaning.Web.Auth
         /// </summary>
         public Guid Id { get; set; }
         /// <summary>
-        /// 角色
+        /// 角色集合，逗号分隔
         /// </summary>
-        public string Role { get; set; }
+        public string Roles { get; set; }
         /// <summary>
         /// 职能
         /// </summary>
