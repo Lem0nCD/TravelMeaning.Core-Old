@@ -15,6 +15,11 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Threading.Tasks;
+using TravelMeaning.DAL;
+using TravelMeaning.IDAL;
+using TravelMeaning.BLL;
+using TravelMeaning.IBLL;
+using TravelMeaning.Web.IOCRegister;
 
 namespace TravelMeaning.Web
 {
@@ -30,7 +35,10 @@ namespace TravelMeaning.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<TMContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddControllers();
             #region Swagger
             services.AddSwaggerGen(c =>
@@ -66,7 +74,7 @@ namespace TravelMeaning.Web
                 options.AddPolicy("LimitRquest", policy =>
                 {
                     policy
-                    .WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5500")
+                    .WithOrigins("http://127.0.0.1:8080", "http://localhost:8080")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
@@ -110,6 +118,14 @@ namespace TravelMeaning.Web
                 };
             });
             #endregion
+            #region IOC Container
+            //BLLDALRegister bLLDALRegister = new BLLDALRegister();
+            //bLLDALRegister.Register(services);
+            services.AddScoped(typeof( IUserManager),typeof( UserManager));
+            services.AddScoped(typeof(IUserService),typeof(UserService));
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddSingleton<ILogger>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +133,7 @@ namespace TravelMeaning.Web
         {
             if (env.IsDevelopment())
             {
+                //logger.LogInformation("In Development environment");
                 app.UseDeveloperExceptionPage();
             }
             app.UseStatusCodePages();
@@ -136,7 +153,7 @@ namespace TravelMeaning.Web
             app.UseCors("LimitRquest");
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name : "default",pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
 

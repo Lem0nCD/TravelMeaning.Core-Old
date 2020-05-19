@@ -32,6 +32,12 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
+        <member name="M:TravelMeaning.Web.Controllers.TestController.AuthorizeRolesAdmin">
+            <summary>
+            验证权限
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:TravelMeaning.Web.Controllers.WeatherForecastController.Get">
             <summary>
             Get All WeatherForecast

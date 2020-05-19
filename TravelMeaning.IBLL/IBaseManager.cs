@@ -7,10 +7,10 @@ namespace TravelMeaning.IBLL
 {
     public interface IBaseManager<T> where T : BaseEntity
     {
-        Task CreateAsync(T model, bool saved = true);
-        Task EditAsync(T model, bool saved = true);
-        Task RemoveAsync(T model, bool saved = true);
-        Task RemoveAsync(Guid id, bool saved = true);
+        Task<bool> CreateAsync(T model, bool saved = true);
+        Task<bool> EditAsync(T model, bool saved = true);
+        Task<bool> RemoveAsync(T model, bool saved = true);
+        Task<bool> RemoveAsync(Guid id, bool saved = true);
         Task<bool> SaveChange();
         Task<T> GetOneByIdAsync(Guid id);
         IQueryable<T> GetAll();

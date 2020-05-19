@@ -19,7 +19,7 @@ namespace TravelMeaning.DAL
             _db = db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        public async Task CreateAsync(T model, bool saved = true)
+        public async Task<bool> CreateAsync(T model, bool saved = true)
         {
             if (model == null)
             {
@@ -28,16 +28,12 @@ namespace TravelMeaning.DAL
             _db.Set<T>().Add(model);
             if (saved)
             {
-                await _db.SaveChangesAsync();
+               return await SaveChange();
             }
+            return false;
         }
 
-        public void Dispose()
-        {
-            _db.Dispose();
-        }
-
-        public async Task EditAsync(T model, bool saved = true)
+        public async Task<bool> EditAsync(T model, bool saved = true)
         {
             if (model == null)
             {
@@ -46,13 +42,15 @@ namespace TravelMeaning.DAL
             _db.Entry(model).State = EntityState.Modified;
             if (saved)
             {
-                await _db.SaveChangesAsync();
+                return await SaveChange();
             }
+            return false;
+
         }
 
         public IQueryable<T> GetAll()
         {
-            return _db.Set<T>().Where(m => !m.IsRemove).AsNoTracking();
+            return _db.Set<T>().Where(m => !m.IsRemove);
         }
 
         public IQueryable<T> GetAllByPage(int pageSize = 10, int pageIndex = 0)
@@ -78,19 +76,19 @@ namespace TravelMeaning.DAL
             {
                 throw new ArgumentNullException(nameof(id));
             }
-            return await GetAll().FirstAsync(m => m.Id == id);
+            return await GetAll().FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public async Task RemoveAsync(T model, bool saved = true)
+        public async Task<bool> RemoveAsync(T model, bool saved = true)
         {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
             }
-            await RemoveAsync(model.Id, saved);
+            return await RemoveAsync(model.Id, saved);
         }
 
-        public async Task RemoveAsync(Guid id, bool saved = true)
+        public async Task<bool> RemoveAsync(Guid id, bool saved = true)
         {
             if (id == Guid.Empty)
             {
@@ -100,13 +98,15 @@ namespace TravelMeaning.DAL
             m.IsRemove = true;
             if (saved)
             {
-                await _db.SaveChangesAsync();
+               return  await SaveChange();
             }
+            return false;
         }
 
         public async Task<bool> SaveChange()
         {
-            return await _db.SaveChangesAsync() >= 0;
+            int var = await _db.SaveChangesAsync();
+            return true;
         }
     }
 }

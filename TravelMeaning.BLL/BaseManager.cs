@@ -16,14 +16,14 @@ namespace TravelMeaning.BLL
             _baseSvc = baseSvc ?? throw new ArgumentNullException(nameof(baseSvc));
         }
 
-        public async Task CreateAsync(T model, bool saved = true)
+        public async Task<bool> CreateAsync(T model, bool saved = true)
         {
-           await _baseSvc.CreateAsync(model, saved);
+           return await _baseSvc.CreateAsync(model, saved);
         }
 
-        public async Task EditAsync(T model, bool saved = true)
+        public async Task<bool> EditAsync(T model, bool saved = true)
         {
-            await _baseSvc.EditAsync(model, saved);
+            return await _baseSvc.EditAsync(model, saved);
         }
 
         public IQueryable<T> GetAll()
@@ -51,14 +51,14 @@ namespace TravelMeaning.BLL
             return _baseSvc.GetOneByIdAsync(id);
         }
 
-        public async Task RemoveAsync(T model, bool saved = true)
+        public async Task<bool> RemoveAsync(T model, bool saved = true)
         {
-            await _baseSvc.RemoveAsync(model,saved);
+            return await _baseSvc.RemoveAsync(model,saved);
         }
 
-        public async Task RemoveAsync(Guid id, bool saved = true)
+        public async Task<bool> RemoveAsync(Guid id, bool saved = true)
         {
-            await _baseSvc.RemoveAsync(id, saved);
+            return await _baseSvc.RemoveAsync(id, saved);
         }
 
         public async Task<bool> SaveChange()

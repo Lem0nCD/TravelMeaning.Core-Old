@@ -17,10 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TravelMeaning.BLL\TravelMeaning.BLL.csproj" />
+    <ProjectReference Include="..\TravelMeaning.Common\TravelMeaning.Common.csproj" />
     <ProjectReference Include="..\TravelMeaning.DAL\TravelMeaning.DAL.csproj" />
     <ProjectReference Include="..\TravelMeaning.IBLL\TravelMeaning.IBLL.csproj" />
     <ProjectReference Include="..\TravelMeaning.IDAL\TravelMeaning.IDAL.csproj" />
     <ProjectReference Include="..\TravelMeaning.Models\TravelMeaning.Models.csproj" />
+    <ProjectReference Include="..\TravelMeaning.Web\TravelMeaning.Web.csproj" />
   </ItemGroup>
 
 </Project>
