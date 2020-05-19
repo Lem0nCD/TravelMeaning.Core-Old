@@ -4,10 +4,12 @@ using TravelMeaning.Models.Model;
 
 namespace TravelMeaning.DAL
 {
-    public class UserService : BaseService<User>, IUserService
+    public class UserRoleService : BaseService<UserRole>, IUserRoleService
     {
-        public UserService(TMContext db) : base(db)
+        public UserRoleService(TMContext db) : base(db)
         {
         }
+
+
     }
 }

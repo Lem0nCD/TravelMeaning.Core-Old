@@ -374,5 +374,15 @@
             权限外键
             </summary>
         </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.ResponseModel`1.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.ResponseModel`1.Data">
+            <summary>
+            返回内容
+            </summary>
+        </member>
     </members>
 </doc>

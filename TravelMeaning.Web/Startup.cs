@@ -119,10 +119,7 @@ namespace TravelMeaning.Web
             });
             #endregion
             #region IOC Container
-            //BLLDALRegister bLLDALRegister = new BLLDALRegister();
-            //bLLDALRegister.Register(services);
-            services.AddScoped(typeof( IUserManager),typeof( UserManager));
-            services.AddScoped(typeof(IUserService),typeof(UserService));
+            services.RegisterDBService();
             //services.AddScoped<IUserService, UserService>();
             //services.AddSingleton<ILogger>();
             #endregion

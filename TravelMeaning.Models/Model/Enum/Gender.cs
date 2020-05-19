@@ -5,7 +5,7 @@
     /// </summary>
     public enum Gender
     {
-        Nonew = 0,
+        None = 0,
         Female,
         Male
     }

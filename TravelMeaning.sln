@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.IBLL", "Trave
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Test", "TravelMeaning.Test\TravelMeaning.Test.csproj", "{AE394F36-2E45-4F31-A117-C1063F3AC9B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.Common", "TravelMeaning.Common\TravelMeaning.Common.csproj", "{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelMeaning.Common", "TravelMeaning.Common\TravelMeaning.Common.csproj", "{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMeaning.DTO", "TravelMeaning.DTO\TravelMeaning.DTO.csproj", "{7214C605-7655-464F-932C-A414EAD3E13C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1392C6CC-80DE-4F79-83A6-4C0732F9BDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7214C605-7655-464F-932C-A414EAD3E13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7214C605-7655-464F-932C-A414EAD3E13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7214C605-7655-464F-932C-A414EAD3E13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7214C605-7655-464F-932C-A414EAD3E13C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,7 @@ namespace TravelMeaning.Test
     [TestClass]
     public class UnitTest1
     {
+        public const string constr = "Server=.;Database=TravelMeaning;User Id=sa;Password=sa;";
         public static DbContextOptions<TMContext> CreateDbContextOptions(string databaseName)
         {
             var serviceProvider = new ServiceCollection().
@@ -30,7 +31,7 @@ namespace TravelMeaning.Test
         [TestMethod]
         public async Task InsertUser()
         {
-            var q = new UserManager(new UserService(new TMContext(CreateDbContextOptions("Server=.;Database=TravelMeaning;User Id=sa;Password=sa;"))));
+            var q = new UserManager(new UserService(new TMContext(CreateDbContextOptions(constr))));
             for (int i = 0; i < 100; i++)
             {
                 await q.CreateAsync(new User
@@ -44,28 +45,26 @@ namespace TravelMeaning.Test
         [TestMethod]
         public async Task QueryAllUser()
         {
-            var m = new UserManager(new UserService(new TMContext(CreateDbContextOptions("Server=.;Database=TravelMeaning;User Id=sa;Password=sa;"))));
+            var m = new UserManager(new UserService(new TMContext(CreateDbContextOptions(constr))));
             var list = await m.GetAll().ToListAsync();
             Assert.IsTrue(list.Count > 0);
         }
         [TestMethod]
         public async Task QueryAndInsert()
         {
-            var m = new UserManager(new UserService(new TMContext(CreateDbContextOptions("Server=.;Database=TravelMeaning;User Id=sa;Password=sa;"))));
-            await m.SignUp("sdfsdf", "sdfsdfdsf", "4585sd8f");
+            var m = new UserManager(new UserService(new TMContext(CreateDbContextOptions(constr))));
+            await m.SignUp("sdfsdf", "sdfsdfdsf", "4585sd8f", "UserV1");
             var result = await m.GetAll().Where(x => x.Username == "sdfsdf").FirstOrDefaultAsync();
             Assert.IsNotNull(result);
         }
         [TestMethod]
-        public void Signup()
+        public async Task InsertNewRole()
         {
-            var q = new UserManager(new UserService(new TMContext(CreateDbContextOptions("Server=.;Database=TravelMeaning;User Id=sa;Password=sa;"))));
-            var u = new UserController(q);
-            u.SignUp(new Models.ViewModels.User.SignUpViewModel
+            var m = new RoleManager(new RoleService(new TMContext(CreateDbContextOptions(constr))));
+            await m.CreateAsync(new Role
             {
-                Username = "123",
-                Password = "123",
-                PhoneNumber = "123"
+                Name = "UserV1",
+                Description = "∆’Õ®”√ªßV1"
             });
         }
     }

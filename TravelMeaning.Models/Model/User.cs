@@ -40,7 +40,7 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 性别 female 1,male 2
         /// </summary>
-        public Gender Gender { get; set; } = Gender.Nonew;
+        public Gender Gender { get; set; } = Gender.None;
 
         public ChatMessage ChatMessage { get; set; }
         public UserRole UserRole { get; set; }
