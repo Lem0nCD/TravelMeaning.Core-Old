@@ -20,6 +20,7 @@ using TravelMeaning.IDAL;
 using TravelMeaning.BLL;
 using TravelMeaning.IBLL;
 using TravelMeaning.Web.Extensions;
+using AutoMapper;
 
 namespace TravelMeaning.Web
 {
@@ -118,10 +119,9 @@ namespace TravelMeaning.Web
                 };
             });
             #endregion
-            #region IOC Container
+            #region DI Container
             services.RegisterDBService();
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddSingleton<ILogger>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             #endregion
         }
 

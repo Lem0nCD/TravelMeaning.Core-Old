@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,14 @@ namespace TravelMeaning.BLL
         protected readonly IUserService _userSvc;
         protected readonly IRoleService _roleSvc;
         protected readonly IUserRoleService _userRoleSvc;
+        protected readonly IMapper _mapper;
 
-        public UserManager(IUserService userSvc, IUserRoleService userRoleSvc, IRoleService roleSvc)
+        public UserManager(IUserService userSvc, IUserRoleService userRoleSvc, IRoleService roleSvc, IMapper mapper)
         {
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
             _userRoleSvc = userRoleSvc ?? throw new ArgumentNullException(nameof(userRoleSvc));
             _roleSvc = roleSvc ?? throw new ArgumentNullException(nameof(roleSvc));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
         public UserManager(IUserService userSvc)
         {
@@ -39,18 +42,11 @@ namespace TravelMeaning.BLL
         }
         public async Task<UserInfoDTO> GetUserInfo(Guid userId)
         {
-            var rolesStr = string.Join(',',await GetUserRoles(userId));
-            return await _userSvc.GetAll().Where(m => m.Id == userId).Select(m => new UserInfoDTO
-            {
-                Avatar = m.Avatar,
-                Gender = m.Gender,
-                Location = m.Location,
-                Occupation = m.Occupation,
-                PhoneNumber = m.PhoneNumber,
-                UId = m.UId,
-                Username = m.Username,
-                RolesStr = rolesStr
-            }).FirstAsync();
+            var rolesStr = string.Join(',', await GetUserRoles(userId));
+            var user = await _userSvc.GetAll().Where(m => m.Id == userId).FirstOrDefaultAsync();
+            var userinfo = _mapper.Map<UserInfoDTO>(user);
+            userinfo.RolesStr = rolesStr;
+            return userinfo;
         }
         public async Task<string[]> GetUserRoles(Guid userId)
         {
@@ -59,20 +55,12 @@ namespace TravelMeaning.BLL
         public async Task<UserInfoDTO> GetUserInfo(string username)
         {
             var rolesStr = string.Join(',', await GetUserRoles((await FindUserByUserName(username)).Id));
-            return await _userSvc.GetAll().Where(m => m.Username == username).Select(m => new UserInfoDTO
-            {
-                Avatar = m.Avatar,
-                Gender = m.Gender,
-                Location = m.Location,
-                Occupation = m.Occupation,
-                PhoneNumber = m.PhoneNumber,
-                UId = m.UId,
-                Username = m.Username,
-                RolesStr = rolesStr
-
-            }).FirstAsync();
+            var user = await _userSvc.GetAll().Where(m => m.Username == username).FirstOrDefaultAsync();
+            var userinfo = _mapper.Map<UserInfoDTO>(user);
+            userinfo.RolesStr = rolesStr;
+            return userinfo;
         }
-        public async Task<Guid> SignUp(string username, string password, string phoneNumber, string roleName="UserV1")
+        public async Task<Guid> SignUp(string username, string password, string phoneNumber, string roleName = "UserV1")
         {
             var role = await _roleSvc.GetOnewByRoleName(roleName);
             if (role != null)

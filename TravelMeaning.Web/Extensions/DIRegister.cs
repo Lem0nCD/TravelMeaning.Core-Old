@@ -6,7 +6,7 @@ using TravelMeaning.IDAL;
 
 namespace TravelMeaning.Web.Extensions
 {
-    public static class IOCRegister
+    public static class DIRegister
     {
         public static void RegisterDBService(this IServiceCollection services)
         {
