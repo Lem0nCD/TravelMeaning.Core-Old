@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using TravelMeaning.DAL;
 using TravelMeaning.IBLL;
@@ -37,8 +39,8 @@ namespace TravelMeaning.BLL
         }
         public async Task<UserInfoDTO> UserInfo(Guid userId)
         {
-            var userRole = await _userSvc.GetUserRole(userId);
-            //var role = await _roleSvc.GetOneByIdAsync(userRole.RoleId);
+            var roles = _userRoleSvc.GetRolesByUserId(userId);
+            var rolesStr = string.Join(',',(await _userRoleSvc.GetRolesByUserId(userId)));
             return await GetAll().Where(m => m.Id == userId).Select(m => new UserInfoDTO
             {
                 Avatar = m.Avatar,
@@ -47,7 +49,8 @@ namespace TravelMeaning.BLL
                 Occupation = m.Occupation,
                 PhoneNumber = m.PhoneNumber,
                 UId = m.UId,
-                Username = m.Username
+                Username = m.Username,
+                Role = rolesStr
             }).FirstAsync();
         }
         public async Task<UserInfoDTO> UserInfo(string username)

@@ -15,14 +15,10 @@ namespace TravelMeaning.DAL
         {
         }
 
-        public async Task<List<UserRole>> GetAllByRoleId(Guid roleId)
+        public async Task<string[]> GetRolesByUserId(Guid userId)
         {
-            return await GetAll().Where(x => x.RoleId == roleId).ToListAsync();
+            return await GetAll().Where(x => x.UserId == userId).Select(x => x.Role.Name).ToArrayAsync();
         }
 
-        public async Task<UserRole> GetOneByUserId(Guid userId)
-        {
-            return await GetAll().Where(x => x.UserId == userId).FirstOrDefaultAsync();
-        }
     }
 }

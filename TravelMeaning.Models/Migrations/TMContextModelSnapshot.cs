@@ -613,7 +613,7 @@ namespace TravelMeaning.Models.Migrations
                         .IsRequired();
 
                     b.HasOne("TravelMeaning.Models.Model.User", "User")
-                        .WithMany("UserRole")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

@@ -43,7 +43,7 @@ namespace TravelMeaning.Models.Model
         public Gender Gender { get; set; } = Gender.None;
 
         public ChatMessage ChatMessage { get; set; }
-        public ICollection<UserRole> UserRole { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<BindingTypeUser> Bindings { get; set; }
         public ICollection<Conversation> ToConversations { get; set; }
         public ICollection<Conversation> FromConversations { get; set; }

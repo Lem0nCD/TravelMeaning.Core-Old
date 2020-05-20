@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,12 +13,6 @@ namespace TravelMeaning.DAL
     {
         public UserService(TMContext db) : base(db)
         {
-        }
-
-        public async Task<List<UserRole>> GetUserRole(Guid userId)
-        {
-            throw new ArgumentNullException();
-            //return await GetAll().Where(x => x.;
         }
     }
 }

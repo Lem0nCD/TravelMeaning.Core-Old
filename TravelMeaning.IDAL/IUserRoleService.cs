@@ -7,7 +7,6 @@ namespace TravelMeaning.IDAL
 {
     public interface IUserRoleService : IBaseService<UserRole>
     {
-        public Task<UserRole> GetOneByUserId(Guid userId);
-        public Task<List<UserRole>> GetAllByRoleId(Guid roleId);
+        public Task<string[]> GetRolesByUserId(Guid userId);
     }
 }

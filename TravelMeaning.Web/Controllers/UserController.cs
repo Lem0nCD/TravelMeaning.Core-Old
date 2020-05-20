@@ -36,12 +36,13 @@ namespace TravelMeaning.Web.Controllers
 
             if (user !=null)
             {
-                CustomPayloadModel tokenModel = new CustomPayloadModel
-                {
-                    Id = user.Id
-                };
-                responseModel.Data.Token = JWTHelper.IssueJWT(tokenModel);
+                //CustomPayloadModel tokenModel = new CustomPayloadModel
+                //{
+                //    Id = user.Id
+                //};
+                //responseModel.Data.Token = JWTHelper.IssueJWT(tokenModel);
                 responseModel.Code = StateCode.Sucess;
+                responseModel.Data.UserInfo = await _userManager.UserInfo(user.Id);
             }
             return responseModel;
         }
