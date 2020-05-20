@@ -32,9 +32,9 @@ namespace TravelMeaning.Models.DTO
         /// </summary>
         public string PhoneNumber { get; set; }
         /// <summary>
-        /// 用户角色
+        /// 用户角色字符串（多种）
         /// </summary>
-        public string Role { get; set; }
+        public string RolesStr { get; set; }
         /// <summary>
         /// 性别 female 1,male 2
         /// </summary>

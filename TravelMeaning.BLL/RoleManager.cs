@@ -10,11 +10,11 @@ using TravelMeaning.Models.Model;
 
 namespace TravelMeaning.BLL
 {
-    public class RoleManager : BaseManager<Role>, IRoleManager
+    public class RoleManager :IRoleManager
     {
         protected readonly IRoleService _roleSvc;
 
-        public RoleManager(IRoleService roleSvc) : base(roleSvc)
+        public RoleManager(IRoleService roleSvc)
         {
             _roleSvc = roleSvc ?? throw new ArgumentNullException(nameof(roleSvc));
         }

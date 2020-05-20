@@ -31,18 +31,21 @@ namespace TravelMeaning.Web.Controllers
             var responseModel = new ResponseModel<LogInModel>
             {
                 Code = StateCode.Illegal,
-                Data = new LogInModel()
+                Data = new LogInModel(),
             };
 
-            if (user !=null)
+            if (user != null)
             {
-                //CustomPayloadModel tokenModel = new CustomPayloadModel
-                //{
-                //    Id = user.Id
-                //};
-                //responseModel.Data.Token = JWTHelper.IssueJWT(tokenModel);
                 responseModel.Code = StateCode.Sucess;
-                responseModel.Data.UserInfo = await _userManager.UserInfo(user.Id);
+                var uesrInfo = await _userManager.GetUserInfo(user.Id);
+                responseModel.Data.UserInfo = uesrInfo;
+                CustomPayloadModel tokenModel = new CustomPayloadModel
+                {
+                    Id = user.Id,
+                    Roles = uesrInfo.RolesStr
+                };
+                responseModel.Data.Token = JWTHelper.IssueJWT(tokenModel);
+
             }
             return responseModel;
         }
@@ -60,30 +63,10 @@ namespace TravelMeaning.Web.Controllers
             };
             if (!await _userManager.HasUserByUsername(viewModel.Username))
             {
-                await _userManager.SignUp(viewModel.Username, viewModel.Password, viewModel.PhoneNumber,"UserV1");
+                await _userManager.SignUp(viewModel.Username, viewModel.Password, viewModel.PhoneNumber, "UserV1");
                 response.Data.IsSucess = await _userManager.HasUserByUsername(viewModel.Username);
             }
             return response;
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetAllUser()
-        {
-            var list = _userManager.GetAll().ToList();
-            User one = new User();
-            for (int i = 0; i < 100; i++)
-            {
-                try
-                {
-                    one = list.FirstOrDefault();
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            }
-            return Ok(await _userManager.GetOneByIdAsync(one.Id));
         }
     }
 }

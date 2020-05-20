@@ -34,9 +34,9 @@
             电话号码
             </summary>
         </member>
-        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Role">
+        <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.RolesStr">
             <summary>
-            用户角色
+            用户角色字符串（多种）
             </summary>
         </member>
         <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Gender">

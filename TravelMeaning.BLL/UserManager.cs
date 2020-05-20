@@ -12,19 +12,19 @@ using TravelMeaning.Models.Model;
 
 namespace TravelMeaning.BLL
 {
-    public class UserManager : BaseManager<User>, IUserManager
+    public class UserManager : IUserManager
     {
         protected readonly IUserService _userSvc;
         protected readonly IRoleService _roleSvc;
         protected readonly IUserRoleService _userRoleSvc;
 
-        public UserManager(IUserService userSvc, IUserRoleService userRoleSvc, IRoleService roleSvc) : base(userSvc)
+        public UserManager(IUserService userSvc, IUserRoleService userRoleSvc, IRoleService roleSvc)
         {
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
             _userRoleSvc = userRoleSvc ?? throw new ArgumentNullException(nameof(userRoleSvc));
             _roleSvc = roleSvc ?? throw new ArgumentNullException(nameof(roleSvc));
         }
-        public UserManager(IUserService userSvc) : base(userSvc)
+        public UserManager(IUserService userSvc)
         {
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
         }
@@ -35,13 +35,12 @@ namespace TravelMeaning.BLL
 
         public async Task<User> Login(string username, string password)
         {
-            return await GetAll().Where(m => m.Username == username && m.Password == password).FirstAsync();
+            return await _userSvc.GetAll().Where(m => m.Username == username && m.Password == password).FirstAsync();
         }
-        public async Task<UserInfoDTO> UserInfo(Guid userId)
+        public async Task<UserInfoDTO> GetUserInfo(Guid userId)
         {
-            var roles = _userRoleSvc.GetRolesByUserId(userId);
-            var rolesStr = string.Join(',',(await _userRoleSvc.GetRolesByUserId(userId)));
-            return await GetAll().Where(m => m.Id == userId).Select(m => new UserInfoDTO
+            var rolesStr = string.Join(',',await GetUserRoles(userId));
+            return await _userSvc.GetAll().Where(m => m.Id == userId).Select(m => new UserInfoDTO
             {
                 Avatar = m.Avatar,
                 Gender = m.Gender,
@@ -50,12 +49,17 @@ namespace TravelMeaning.BLL
                 PhoneNumber = m.PhoneNumber,
                 UId = m.UId,
                 Username = m.Username,
-                Role = rolesStr
+                RolesStr = rolesStr
             }).FirstAsync();
         }
-        public async Task<UserInfoDTO> UserInfo(string username)
+        public async Task<string[]> GetUserRoles(Guid userId)
         {
-            return await GetAll().Where(m => m.Username == username).Select(m => new UserInfoDTO
+            return await _userRoleSvc.GetRolesByUserId(userId);
+        }
+        public async Task<UserInfoDTO> GetUserInfo(string username)
+        {
+            var rolesStr = string.Join(',', await GetUserRoles((await FindUserByUserName(username)).Id));
+            return await _userSvc.GetAll().Where(m => m.Username == username).Select(m => new UserInfoDTO
             {
                 Avatar = m.Avatar,
                 Gender = m.Gender,
@@ -63,22 +67,10 @@ namespace TravelMeaning.BLL
                 Occupation = m.Occupation,
                 PhoneNumber = m.PhoneNumber,
                 UId = m.UId,
-                Username = m.Username
-            }).FirstAsync();
-        }
+                Username = m.Username,
+                RolesStr = rolesStr
 
-        public UserInfoDTO UserInfo(User user)
-        {
-            return new UserInfoDTO
-            {
-                Avatar = user.Avatar,
-                Gender = user.Gender,
-                Location = user.Location,
-                Occupation = user.Occupation,
-                PhoneNumber = user.PhoneNumber,
-                UId = user.UId,
-                Username = user.Username
-            };
+            }).FirstAsync();
         }
         public async Task<Guid> SignUp(string username, string password, string phoneNumber, string roleName="UserV1")
         {
@@ -105,5 +97,9 @@ namespace TravelMeaning.BLL
             throw new Exception("Create User Fail!");
         }
 
+        public async Task<User> FindUserByUserName(string username)
+        {
+            return await _userSvc.GetAll().Where(x => x.Username == username).FirstOrDefaultAsync();
+        }
     }
 }
