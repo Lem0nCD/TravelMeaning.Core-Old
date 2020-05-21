@@ -82,42 +82,44 @@ namespace TravelMeaning.Web
             });
             #endregion
             #region Authorization
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
-            });
+            services.AddAuthorizatoinSetup();
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
+            //});
             #endregion
             #region Custom Authentication
-            var audienceConfig = Configuration.GetSection("Audience");
-            var symmetricKeyAsbase64 = audienceConfig["Secret"];
-            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsbase64);
-            var signingKey = new SymmetricSecurityKey(keyByteArray);
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = signingKey,
-                ValidIssuer = audienceConfig["Issuer"],
-                ValidateAudience = true,
-                ValidAudience = audienceConfig["Audience"],
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.FromSeconds(30),
-                RequireExpirationTime = true,
-            };
-            services.AddAuthentication("Bearer").AddJwtBearer(o =>
-            {
-                o.TokenValidationParameters = tokenValidationParameters;
-                o.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                        {
-                            context.Response.Headers.Add("Token-Expired", "True");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+            services.AddAuthenticationSetup(Configuration);
+            //var audienceConfig = Configuration.GetSection("Audience");
+            //var symmetricKeyAsbase64 = audienceConfig["Secret"];
+            //var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsbase64);
+            //var signingKey = new SymmetricSecurityKey(keyByteArray);
+            //var tokenValidationParameters = new TokenValidationParameters
+            //{
+            //    ValidateIssuerSigningKey = true,
+            //    IssuerSigningKey = signingKey,
+            //    ValidIssuer = audienceConfig["Issuer"],
+            //    ValidateAudience = true,
+            //    ValidAudience = audienceConfig["Audience"],
+            //    ValidateLifetime = true,
+            //    ClockSkew = TimeSpan.FromSeconds(30),
+            //    RequireExpirationTime = true,
+            //};
+            //services.AddAuthentication("Bearer").AddJwtBearer(o =>
+            //{
+            //    o.TokenValidationParameters = tokenValidationParameters;
+            //    o.Events = new JwtBearerEvents
+            //    {
+            //        OnAuthenticationFailed = context =>
+            //        {
+            //            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+            //            {
+            //                context.Response.Headers.Add("Token-Expired", "True");
+            //            }
+            //            return Task.CompletedTask;
+            //        }
+            //    };
+            //});
             #endregion
             #region DI Container
             services.RegisterDBService();

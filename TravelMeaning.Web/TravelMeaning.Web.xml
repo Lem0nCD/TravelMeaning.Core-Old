@@ -32,9 +32,10 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
-        <member name="M:TravelMeaning.Web.Controllers.TestController.AuthorizeRolesAdmin">
+        <member name="M:TravelMeaning.Web.Controllers.TestController.AuthorizeRolesUserV1">
             <summary>
             验证权限
+            格式：Authorization Bearer [token]
             </summary>
             <returns></returns>
         </member>

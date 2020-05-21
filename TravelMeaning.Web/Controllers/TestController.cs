@@ -38,13 +38,14 @@ namespace TravelMeaning.Web.Controllers
         }
         /// <summary>
         /// 验证权限
+        /// 格式：Authorization Bearer [token]
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize("Admin")]
-        public IActionResult AuthorizeRolesAdmin()
+        [Authorize(Policy = "UserV1")]
+        public IActionResult AuthorizeRolesUserV1()
         {
-            return Ok();
+            return Ok("UserV1");
         }
 
         [HttpGet]
