@@ -4,6 +4,36 @@
         <name>TravelMeaning.Models</name>
     </assembly>
     <members>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.UserName">
+            <summary>
+            作者名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Content">
+            <summary>
+            正文 markdown
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.CoverImage">
+            <summary>
+            封面图片
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.ViewedCount">
+            <summary>
+            查看数
+            </summary>
+        </member>
         <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Username">
             <summary>
             用户名
@@ -311,7 +341,7 @@
         </member>
         <member name="P:TravelMeaning.Models.Model.TravelGuide.Content">
             <summary>
-            正文 富文本
+            正文 markdown
             </summary>
         </member>
         <member name="P:TravelMeaning.Models.Model.TravelGuide.Title">

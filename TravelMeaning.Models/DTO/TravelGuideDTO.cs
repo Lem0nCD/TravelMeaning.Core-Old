@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TravelMeaning.Models.Model
+namespace TravelMeaning.Models.DTO
 {
-    /// <summary>
-    /// 旅游指南
-    /// </summary>
-    public class TravelGuide : BaseEntity
+    public class TravelGuideDTO
     {
         /// <summary>
-        /// 作者外键
+        /// 作者名
         /// </summary>
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 正文 markdown
         /// </summary>
@@ -34,7 +30,5 @@ namespace TravelMeaning.Models.Model
         /// 查看数
         /// </summary>
         public int ViewedCount { get; set; } = 0;
-        public ICollection<Comment> Comments { get; set; }
-        public TravelGuideReview TravelGuideReview { get; set; }
     }
 }

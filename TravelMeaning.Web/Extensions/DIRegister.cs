@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using TravelMeaning.BLL;
 using TravelMeaning.DAL;
 using TravelMeaning.IBLL;
@@ -8,14 +9,19 @@ namespace TravelMeaning.Web.Extensions
 {
     public static class DIRegister
     {
-        public static void RegisterDBService(this IServiceCollection services)
+        public static void AddDBService(this IServiceCollection services)
         {
-
-            services.AddScoped(typeof(IUserManager), typeof(UserManager));
-            services.AddScoped(typeof(IUserService), typeof(UserService));
-            services.AddScoped(typeof(IRoleManager), typeof(RoleManager));
-            services.AddScoped(typeof(IRoleService), typeof(RoleService));
-            services.AddScoped(typeof(IUserRoleService), typeof(UserRoleService));
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleManager, RoleManager>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
+            services.AddScoped<ITravelGuideManager, TravelGuideManager>();
+            services.AddScoped<ITravelGuideService, TravelGuideService>();
+        }
+        public static void AddHttpContextService(this IServiceCollection services)
+        {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

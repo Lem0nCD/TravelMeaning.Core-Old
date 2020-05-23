@@ -73,6 +73,7 @@ namespace TravelMeaning.Web.Controllers
         //    return Ok(new { count = files.Count, size });
         //}        
         [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
+        [RequestSizeLimit(long.MaxValue)]
         [HttpPost]
         public async Task<IActionResult> UpLoadFile()
         {

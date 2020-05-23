@@ -122,8 +122,9 @@ namespace TravelMeaning.Web
             //});
             #endregion
             #region DI Container
-            services.RegisterDBService();
+            services.AddDBService();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddHttpContextService();
             #endregion
         }
 
@@ -152,7 +153,7 @@ namespace TravelMeaning.Web
             app.UseCors("LimitRquest");
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}").RequireCors("LimitRquest");
             });
 
 

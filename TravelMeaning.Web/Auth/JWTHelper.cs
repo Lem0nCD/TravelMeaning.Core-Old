@@ -44,8 +44,7 @@ namespace TravelMeaning.Web.Auth
             var jwtHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(jwtStr);
             object role = new object();
-            Guid Id;
-            Guid.TryParse(jwtToken.Id, out Id);
+            Guid.TryParse(jwtToken.Id, out Guid Id);
             try
             {
                 jwtToken.Payload.TryGetValue(ClaimTypes.Role, out role);

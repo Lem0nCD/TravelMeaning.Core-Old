@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelMeaning.IBLL;
+using TravelMeaning.Models.DTO;
 using TravelMeaning.Models.Model;
 using TravelMeaning.Models.ResponseModels;
 using TravelMeaning.Models.ResponseModels.User;
@@ -30,7 +31,6 @@ namespace TravelMeaning.Web.Controllers
             var user = await _userManager.Login(viewModel.Username, viewModel.Password);
             var responseModel = new ResponseModel<LogInModel>
             {
-                Code = StateCode.Illegal,
                 Data = new LogInModel(),
             };
 
@@ -52,7 +52,7 @@ namespace TravelMeaning.Web.Controllers
         [HttpPost]
         public async Task<ResponseModel<SignUpModel>> SignUp(SignUpViewModel viewModel)
         {
-            var response = new ResponseModel<SignUpModel>
+            var responseModel = new ResponseModel<SignUpModel>
             {
                 Code = StateCode.Sucess,
                 Data = new SignUpModel
@@ -64,9 +64,26 @@ namespace TravelMeaning.Web.Controllers
             if (!await _userManager.HasUserByUsername(viewModel.Username))
             {
                 await _userManager.SignUp(viewModel.Username, viewModel.Password, viewModel.PhoneNumber, "UserV1");
-                response.Data.IsSucess = await _userManager.HasUserByUsername(viewModel.Username);
+                responseModel.Data.IsSucess = await _userManager.HasUserByUsername(viewModel.Username);
             }
-            return response;
+            return responseModel;
+        }
+
+        [HttpGet]
+        public async Task<ResponseModel<UserInfoDTO>> GetUserInfoById(string userId)
+        {
+            var responseModel = new ResponseModel<UserInfoDTO>
+            {
+                Data = null
+            };
+            if (!Guid.TryParse(userId, out Guid id))
+            {
+                return responseModel;
+            }
+            var userinfo = await _userManager.GetUserInfo(id);
+            responseModel.Code = StateCode.Sucess;
+            responseModel.Data = userinfo;
+            return responseModel;
         }
     }
 }
