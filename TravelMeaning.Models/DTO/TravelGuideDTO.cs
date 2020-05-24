@@ -7,9 +7,9 @@ namespace TravelMeaning.Models.DTO
     public class TravelGuideDTO
     {
         /// <summary>
-        /// 作者名
+        /// 文章Id
         /// </summary>
-        public string UserName { get; set; }
+        public Guid Id { get; set; }
         /// <summary>
         /// 正文 markdown
         /// </summary>
@@ -25,10 +25,26 @@ namespace TravelMeaning.Models.DTO
         /// <summary>
         /// 点赞数
         /// </summary>
-        public int UpVoteCount { get; set; } = 0;
+        public int UpVoteCount { get; set; }
         /// <summary>
         /// 查看数
         /// </summary>
-        public int ViewedCount { get; set; } = 0;
+        public int ViewedCount { get; set; }
+        /// <summary>
+        /// 更新时间
+        /// </summary>
+        public DateTime UpdateTime { get; set; }
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string Username { get; set; }
+        /// <summary>
+        /// 用户Id
+        /// </summary>
+        public Guid UserId { get; set; }
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string Avatar { get; set; }
     }
 }

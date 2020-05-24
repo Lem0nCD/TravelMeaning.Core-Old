@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelMeaning.IBLL;
+using TravelMeaning.Models.DTO;
 using TravelMeaning.Models.ResponseModels;
 using TravelMeaning.Models.ResponseModels.TravelGuide;
 using TravelMeaning.Models.ViewModels.TravelGude;
@@ -13,9 +14,8 @@ using TravelMeaning.Web.Auth;
 
 namespace TravelMeaning.Web.Controllers
 {
-    [Consumes("application/json")]
     [Produces("application/json")]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
 
     public class TravleGuideController : ControllerBase
@@ -38,13 +38,25 @@ namespace TravelMeaning.Web.Controllers
 
         // GET: api/TravleGuide/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(string id)
+        public async Task<ResponseModel<TravelGuideDTO>> Get(string id)
         {
-            return "value";
+            var responseModel = new ResponseModel<TravelGuideDTO>();
+            if (Guid.TryParse(id, out Guid guideId))
+            {
+                await _guideManager.AddViewedCount(guideId);
+                var guide = await _guideManager.GetGuideByIdAsync(guideId);
+                if (guide != null)
+                {
+                    responseModel.Code = StateCode.Sucess;
+                    responseModel.Data = guide;
+                }
+            }
+            return responseModel;
         }
 
         // POST: api/TravleGuide
         [HttpPost]
+        [Consumes("application/json")]
         [Authorize(Policy = "UserV1")]
         public async Task<ResponseModel<CreatedGuideModel>> Post(CreateGuideViewModel viewModel)
         {
@@ -71,6 +83,24 @@ namespace TravelMeaning.Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPost]
+        public async Task<ResponseModel<dynamic>> UpVoteToGuide(UpVoteToGuideViewModel viewModel)
+        {
+            var responseModel = new ResponseModel<dynamic>
+            {
+                Data = new
+                {
+                    result = false,
+                }
+            };
+            if (Guid.TryParse(viewModel.Id, out Guid guideId) && Guid.TryParse(viewModel.UserId, out Guid userId))
+            {
+                await _guideManager.AddUpVoteCount(guideId, userId);
+                responseModel.Data.result = true;
+            }
+            return responseModel;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelMeaning.IBLL;
@@ -13,12 +15,28 @@ namespace TravelMeaning.BLL
     public class TravelGuideManager : ITravelGuideManager
     {
         protected readonly ITravelGuideService _travelGuideSvc;
+        protected readonly IUserService _userSvc;
         protected readonly IMapper _mapper;
 
-        public TravelGuideManager(ITravelGuideService travelGuideSvc, IMapper mapper)
+        public TravelGuideManager(ITravelGuideService travelGuideSvc, IMapper mapper, IUserService userSvc)
         {
             _travelGuideSvc = travelGuideSvc ?? throw new ArgumentNullException(nameof(travelGuideSvc));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
+        }
+
+        public async Task AddUpVoteCount(Guid id, Guid userId)
+        {
+            var guide = _travelGuideSvc.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            guide.UpVoteCount++;
+            await _travelGuideSvc.EditAsync(guide);
+        }
+
+        public async Task AddViewedCount(Guid id)
+        {
+            var guide = _travelGuideSvc.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            guide.ViewedCount++;
+            await _travelGuideSvc.EditAsync(guide);
         }
 
         public async Task<Guid> CreateGuideAsync(Guid userId, string content, string title, string imgurl)
@@ -37,19 +55,30 @@ namespace TravelMeaning.BLL
             return Guid.Empty;
         }
 
-        public Task<bool> DeleteGuideAsync(string userId, string content)
+        public Task<bool> DeleteGuideAsync(Guid userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<TravelGuideDTO>> GetAllGuideAsync()
+        public Task<Guid> FavoriteGuide(Guid Id, Guid UserId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TravelGuideDTO> GetGuideByIdAsync(string guideId)
+        public async Task<List<TravelGuideDTO>> GetAllGuideAsync()
         {
-            throw new NotImplementedException();
+            var list = await _travelGuideSvc.GetAll().OrderBy(x => x.UpdateTime).Take(30).ToListAsync();
+            return _mapper.Map<List<TravelGuideDTO>>(list);
+        }
+
+        public async Task<TravelGuideDTO> GetGuideByIdAsync(Guid id)
+        {
+            var guide = await _travelGuideSvc.GetAll().Where(x => x.Id == id).Include(x => x.User).FirstAsync();
+            var guideDTO = _mapper.Map<TravelGuideDTO>(guide);
+            guideDTO.UserId = guide.User.Id;
+            guideDTO.Username = guide.User.Username;
+            guideDTO.Avatar = guide.User.Avatar;
+            return guideDTO;
         }
 
         public Task<List<TravelGuideDTO>> GetGuideByPageAsync(int page, int take, bool desc = true)
@@ -57,7 +86,12 @@ namespace TravelMeaning.BLL
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateGuideAsync(string userId, string content)
+        public Task<List<TravelGuideDTO>> GetGuideByUserIdAsync(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateGuideAsync(Guid userId, string content)
         {
             throw new NotImplementedException();
         }

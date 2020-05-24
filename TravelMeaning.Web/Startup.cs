@@ -148,12 +148,13 @@ namespace TravelMeaning.Web
             #endregion
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseCors("LimitRquest");
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors("LimitRquest");
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}").RequireCors("LimitRquest");
+                //endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}").RequireCors("LimitRquest");
+                endpoints.MapControllers();
             });
 
 

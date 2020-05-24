@@ -76,7 +76,7 @@ namespace TravelMeaning.Models.Data
             modelBuilder.Entity<TravelGuide>(x =>
             {
                 x.HasOne(x => x.User).WithMany(x => x.TravelGuides).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
-                x.Property(x => x.Title).HasColumnType("nvarchar(30)").IsRequired();
+                x.Property(x => x.Title).HasColumnType("nvarchar(100)").IsRequired();
                 x.Property(x => x.Content).HasColumnType("nvarchar(max)").IsRequired();
                 x.Property(x => x.CoverImage).HasColumnType("nvarchar(1000)");
             });

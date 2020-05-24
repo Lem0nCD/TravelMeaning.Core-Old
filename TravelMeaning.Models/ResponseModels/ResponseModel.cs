@@ -5,7 +5,7 @@
         /// <summary>
         /// 状态码
         /// </summary>
-        public int Code { get; set; } = StateCode.Illegal;
+        public int Code { get; set; } = StateCode.NotFound;
         /// <summary>
         /// 返回内容
         /// </summary>

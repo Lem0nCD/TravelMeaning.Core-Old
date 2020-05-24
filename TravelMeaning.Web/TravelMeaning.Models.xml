@@ -4,9 +4,9 @@
         <name>TravelMeaning.Models</name>
     </assembly>
     <members>
-        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.UserName">
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Id">
             <summary>
-            作者名
+            文章Id
             </summary>
         </member>
         <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Content">
@@ -32,6 +32,26 @@
         <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.ViewedCount">
             <summary>
             查看数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Avatar">
+            <summary>
+            头像
             </summary>
         </member>
         <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Username">
