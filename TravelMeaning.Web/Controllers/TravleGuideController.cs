@@ -21,12 +21,14 @@ namespace TravelMeaning.Web.Controllers
     public class TravleGuideController : ControllerBase
     {
         private readonly ITravelGuideManager _guideManager;
+        private readonly ITravelGuideReviewManager _reviewManager;
         private readonly IHttpContextAccessor _httpContext;
 
-        public TravleGuideController(ITravelGuideManager guideManager, IHttpContextAccessor httpContext)
+        public TravleGuideController(ITravelGuideManager guideManager, IHttpContextAccessor httpContext, ITravelGuideReviewManager reviewManager)
         {
             _guideManager = guideManager ?? throw new ArgumentNullException(nameof(guideManager));
             _httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
+            _reviewManager = reviewManager ?? throw new ArgumentNullException(nameof(reviewManager));
         }
 
         // GET: api/TravleGuide
@@ -64,17 +66,19 @@ namespace TravelMeaning.Web.Controllers
         [Authorize(Policy = "UserV1")]
         public async Task<ResponseModel<CreatedGuideModel>> Post(CreateGuideViewModel viewModel)
         {
+            var responseModel = new ResponseModel<CreatedGuideModel>();
             var userId = JWTHelper.SeriallzeJwt(((string)_httpContext.HttpContext.Request.Headers["Authorization"]).Replace("Bearer ", string.Empty)).Id;
-            var result = await _guideManager.CreateGuideAsync(userId, viewModel.Content, viewModel.Title, viewModel.CoverImageUrl);
-            return new ResponseModel<CreatedGuideModel>
+            var guiideId = await _guideManager.CreateGuideAsync(userId, viewModel.Content, viewModel.Title, viewModel.CoverImageUrl);
+            if (guiideId != Guid.Empty)
             {
-                Code = StateCode.Sucess,
-                Data = new CreatedGuideModel
+                var reviewResult = await _reviewManager.CreateGuideReview(guiideId);
+                responseModel.Data = new CreatedGuideModel
                 {
-                    Id = result,
-                    isSucess = result == Guid.Empty || result == null
-                }
-            };
+                    Id = guiideId,
+                };
+                responseModel.Code = StateCode.Sucess;
+            }
+            return responseModel;
         }
 
         // PUT: api/TravleGuide/5
@@ -90,10 +94,10 @@ namespace TravelMeaning.Web.Controllers
         }
 
         [HttpPost(nameof(UpVoteToGuide))]
-        public async Task<ResponseModel<GenericModel>> UpVoteToGuide( string id)
+        public async Task<ResponseModel<GenericModel>> UpVoteToGuide(string id)
         {
             var responseModel = new ResponseModel<GenericModel>();
-            if (Guid.TryParse(id,out Guid guideId))
+            if (Guid.TryParse(id, out Guid guideId))
             {
                 await _guideManager.AddUpVoteCount(guideId);
                 responseModel.Data.IsSucess = true;
@@ -111,6 +115,5 @@ namespace TravelMeaning.Web.Controllers
             }
             return responseModel;
         }
-
     }
 }

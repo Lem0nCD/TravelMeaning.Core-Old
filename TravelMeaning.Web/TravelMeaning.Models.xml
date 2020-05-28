@@ -34,6 +34,56 @@
             创建时间
             </summary>
         </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.GuideId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.UserId">
+            <summary>
+            作者外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.Username">
+            <summary>
+            作者名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.Title">
+            <summary>
+            正文 markdown
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.CoverImage">
+            <summary>
+            封面图片
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.ViewedCount">
+            <summary>
+            查看数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.State">
+            <summary>
+            审核状态
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.Note">
+            <summary>
+            审核信息
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideReviewDTO.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
         <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Id">
             <summary>
             文章Id
@@ -354,7 +404,7 @@
             审核状态
             </summary>
         </member>
-        <member name="F:TravelMeaning.Models.Model.ReviewState.InReview">
+        <member name="F:TravelMeaning.Models.Model.ReviewState.Reviewing">
             <summary>
             审核中
             </summary>
@@ -364,7 +414,7 @@
             未通过
             </summary>
         </member>
-        <member name="F:TravelMeaning.Models.Model.ReviewState.Approved">
+        <member name="F:TravelMeaning.Models.Model.ReviewState.Published">
             <summary>
             已通过
             </summary>

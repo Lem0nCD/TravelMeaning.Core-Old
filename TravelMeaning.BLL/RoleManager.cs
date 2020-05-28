@@ -38,9 +38,21 @@ namespace TravelMeaning.BLL
             throw new NullReferenceException("没有该权限名");
         }
 
-        public async Task<List<Role>> GetAllRole()
+        public async Task<List<Role>> GetAllRoles()
         {
             return await _roleSvc.GetAll().ToListAsync();
+        }
+
+        public async Task<Role> GetOneRoleById(Guid id)
+        {
+            return await _roleSvc.GetOneByIdAsync(id);
+
+        }
+
+        public async Task<Role> GetOneRoleByName(string name)
+        {
+            return await _roleSvc.GetOnewByRoleName(name);
+
         }
     }
 }

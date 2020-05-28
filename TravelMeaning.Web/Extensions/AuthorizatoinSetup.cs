@@ -13,7 +13,7 @@ namespace TravelMeaning.Web.Extensions
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("UserV1", policy => policy.RequireRole("UserV1").Build());
-                options.AddPolicy("Editor", policy => policy.RequireRole("Editor").Build());
+                options.AddPolicy("Review", policy => policy.RequireRole("Editor", "Admin").Build());
                 options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
             });
         }

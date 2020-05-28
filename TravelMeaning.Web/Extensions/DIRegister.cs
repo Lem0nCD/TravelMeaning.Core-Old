@@ -20,8 +20,8 @@ namespace TravelMeaning.Web.Extensions
             services.AddScoped<ITravelGuideService, TravelGuideService>();
             services.AddScoped<ICommentManager, CommentManager>();
             services.AddScoped<ICommentService, CommentService>();
-            services.AddScoped<I, CommentService>();
-            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ITravelGuideReviewManager, TravelGuideReviewManager>();
+            services.AddScoped<ITravelGuideReviewService, TravelGuideReviewService>();
         }
         public static void AddHttpContextService(this IServiceCollection services)
         {

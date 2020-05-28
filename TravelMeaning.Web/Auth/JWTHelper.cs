@@ -22,8 +22,8 @@ namespace TravelMeaning.Web.Auth
                 new Claim(JwtRegisteredClaimNames.Jti,model.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat,(new DateTimeOffset(dateTime).ToUnixTimeSeconds()).ToString()),
                 new Claim(JwtRegisteredClaimNames.Nbf,(new DateTimeOffset(dateTime).ToUnixTimeSeconds()).ToString()),
-                new Claim(JwtRegisteredClaimNames.Exp,(new DateTimeOffset(dateTime).AddSeconds(1800).ToUnixTimeSeconds()).ToString()),
-                new Claim(ClaimTypes.Expiration, DateTime.Now.AddSeconds(1800).ToString()),
+                new Claim(JwtRegisteredClaimNames.Exp,(new DateTimeOffset(dateTime).AddDays(7).ToUnixTimeSeconds()).ToString()),
+                new Claim(ClaimTypes.Expiration, DateTime.Now.AddDays(7).ToString()),
                 new Claim(JwtRegisteredClaimNames.Iss,iss),
                 new Claim(JwtRegisteredClaimNames.Aud,aud),
             };
