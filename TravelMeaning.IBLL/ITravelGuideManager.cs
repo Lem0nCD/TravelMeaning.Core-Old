@@ -17,7 +17,7 @@ namespace TravelMeaning.IBLL
         public Task<List<TravelGuideDTO>> GetGuideByPageAsync(int page,int take,bool desc = true);
         public Task<Guid> FavoriteGuide(Guid Id,Guid UserId);
         public Task AddViewedCount(Guid id);
-        public Task AddUpVoteCount(Guid id,Guid userId);
+        public Task AddUpVoteCount(Guid id);
 
     }
 }

@@ -31,13 +31,17 @@ namespace TravelMeaning.Web.Controllers
 
         // GET: api/TravleGuide
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ResponseModel<List<TravelGuideDTO>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new ResponseModel<List<TravelGuideDTO>>
+            {
+                Code = StateCode.Sucess,
+                Data = await _guideManager.GetAllGuideAsync(),
+            };
         }
 
         // GET: api/TravleGuide/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetTravelGuide")]
         public async Task<ResponseModel<TravelGuideDTO>> Get(string id)
         {
             var responseModel = new ResponseModel<TravelGuideDTO>();
@@ -85,22 +89,28 @@ namespace TravelMeaning.Web.Controllers
         {
         }
 
-        [HttpPost]
-        public async Task<ResponseModel<dynamic>> UpVoteToGuide(UpVoteToGuideViewModel viewModel)
+        [HttpPost(nameof(UpVoteToGuide))]
+        public async Task<ResponseModel<GenericModel>> UpVoteToGuide( string id)
         {
-            var responseModel = new ResponseModel<dynamic>
+            var responseModel = new ResponseModel<GenericModel>();
+            if (Guid.TryParse(id,out Guid guideId))
             {
-                Data = new
-                {
-                    result = false,
-                }
-            };
-            if (Guid.TryParse(viewModel.Id, out Guid guideId) && Guid.TryParse(viewModel.UserId, out Guid userId))
-            {
-                await _guideManager.AddUpVoteCount(guideId, userId);
-                responseModel.Data.result = true;
+                await _guideManager.AddUpVoteCount(guideId);
+                responseModel.Data.IsSucess = true;
             }
             return responseModel;
         }
+        [HttpGet(nameof(GetGuideByUserId))]
+        public async Task<ResponseModel<List<TravelGuideDTO>>> GetGuideByUserId(string id)
+        {
+            var responseModel = new ResponseModel<List<TravelGuideDTO>>();
+            if (Guid.TryParse(id, out Guid userId))
+            {
+                responseModel.Data = await _guideManager.GetGuideByUserIdAsync(userId);
+                responseModel.Code = StateCode.Sucess;
+            }
+            return responseModel;
+        }
+
     }
 }

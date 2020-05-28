@@ -17,7 +17,7 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 审核状态
         /// </summary>
-        public ReviewState State { get; set; } = ReviewState.InReview;
+        public ReviewState State { get; set; } = ReviewState.Reviewing;
         /// <summary>
         /// 审核信息
         /// </summary>

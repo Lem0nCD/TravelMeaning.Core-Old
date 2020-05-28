@@ -4,6 +4,36 @@
         <name>TravelMeaning.Models</name>
     </assembly>
     <members>
+        <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.Avatar">
+            <summary>
+            头像路径
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.Content">
+            <summary>
+            评论正文
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
         <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Id">
             <summary>
             文章Id
@@ -52,6 +82,86 @@
         <member name="P:TravelMeaning.Models.DTO.TravelGuideDTO.Avatar">
             <summary>
             头像
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.Location">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.Occupation">
+            <summary>
+            职业
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.UId">
+            <summary>
+            用户号(非ID)
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.PhoneNumber">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.RolesStr">
+            <summary>
+            用户角色字符串（多种）
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.Gender">
+            <summary>
+            性别 female 1,male 2
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.GuidesUpVoteCount">
+            <summary>
+            收到的赞
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.FansCount">
+            <summary>
+            粉丝数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.GuideCount">
+            <summary>
+            文章总数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.CommentCount">
+            <summary>
+            评论总数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoCommentDTO.Title">
+            <summary>
+            文章标题
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoCommentDTO.Content">
+            <summary>
+            评论正文
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoCommentDTO.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.UserInfoCommentDTO.CreateTime">
+            <summary>
+            创建时间
             </summary>
         </member>
         <member name="P:TravelMeaning.Models.DTO.UserInfoDTO.Username">
@@ -216,7 +326,7 @@
         </member>
         <member name="P:TravelMeaning.Models.Model.Conversation.User2Id">
             <summary>
-            用户1外键
+            用户2外键
             </summary>
         </member>
         <member name="P:TravelMeaning.Models.Model.Conversation.IsShow">
@@ -464,6 +574,16 @@
             权限外键
             </summary>
         </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.Comment.GuideCommentsModel.Count">
+            <summary>
+            评论总数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.Comment.GuideCommentsModel.Comments">
+            <summary>
+            评论列表
+            </summary>
+        </member>
         <member name="P:TravelMeaning.Models.ResponseModels.ResponseModel`1.Code">
             <summary>
             状态码
@@ -472,6 +592,36 @@
         <member name="P:TravelMeaning.Models.ResponseModels.ResponseModel`1.Data">
             <summary>
             返回内容
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.User.LogInModel.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.User.LogInModel.Id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.User.LogInModel.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.User.LogInModel.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.User.LogInModel.UId">
+            <summary>
+            用户号(非ID)
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.ResponseModels.User.LogInModel.RolesStr">
+            <summary>
+            用户角色字符串（多种）
             </summary>
         </member>
     </members>

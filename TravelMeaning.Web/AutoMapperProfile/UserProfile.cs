@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TravelMeaning.Models.DTO;
 using TravelMeaning.Models.Model;
+using TravelMeaning.Models.ResponseModels.User;
 
 namespace TravelMeaning.Web.AutoMapperProfile
 {
@@ -13,6 +10,8 @@ namespace TravelMeaning.Web.AutoMapperProfile
         public UserProfile()
         {
             CreateMap<User, UserInfoDTO>();
+            CreateMap<User, UserDetailInfoDTO>();
+            CreateMap<User, LogInModel>();
         }
     }
 }

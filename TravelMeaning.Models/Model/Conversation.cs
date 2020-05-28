@@ -12,7 +12,7 @@ namespace TravelMeaning.Models.Model
         public Guid User1Id { get; set; }
         public User User1 { get; set; }
         /// <summary>
-        /// 用户1外键
+        /// 用户2外键
         /// </summary>
         public Guid User2Id { get; set; }
         public User User2 { get; set; }

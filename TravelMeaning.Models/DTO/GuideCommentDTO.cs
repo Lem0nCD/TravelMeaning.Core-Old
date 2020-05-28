@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TravelMeaning.Models.DTO;
 
-namespace TravelMeaning.Models.ResponseModels.User
+namespace TravelMeaning.Models.DTO
 {
-    public class LogInModel
+    public class GuideCommentDTO
     {
-        /// <summary>
-        /// Token
-        /// </summary>
-        public string Token { get; set; }
         /// <summary>
         /// 用户ID
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
         public string Username { get; set; }
         /// <summary>
-        /// 头像
+        /// 头像路径
         /// </summary>
         public string Avatar { get; set; }
         /// <summary>
-        /// 用户号(非ID)
+        /// 评论正文
         /// </summary>
-        public int UId { get; set; }
+        public string Content { get; set; }
         /// <summary>
-        /// 用户角色字符串（多种）
+        /// 点赞数
         /// </summary>
-        public string RolesStr { get; set; }
+        public int UpVoteCount { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
     }
 }

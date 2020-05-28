@@ -25,7 +25,7 @@ namespace TravelMeaning.BLL
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
         }
 
-        public async Task AddUpVoteCount(Guid id, Guid userId)
+        public async Task AddUpVoteCount(Guid id)
         {
             var guide = _travelGuideSvc.GetAll().Where(x => x.Id == id).FirstOrDefault();
             guide.UpVoteCount++;
@@ -67,7 +67,7 @@ namespace TravelMeaning.BLL
 
         public async Task<List<TravelGuideDTO>> GetAllGuideAsync()
         {
-            var list = await _travelGuideSvc.GetAll().OrderBy(x => x.UpdateTime).Take(30).ToListAsync();
+            var list = await _travelGuideSvc.GetAll().OrderBy(x => x.CreateTime).Take(30).ToListAsync();
             return _mapper.Map<List<TravelGuideDTO>>(list);
         }
 
@@ -86,9 +86,10 @@ namespace TravelMeaning.BLL
             throw new NotImplementedException();
         }
 
-        public Task<List<TravelGuideDTO>> GetGuideByUserIdAsync(Guid userId)
+        public async Task<List<TravelGuideDTO>> GetGuideByUserIdAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var list = await _travelGuideSvc.GetAll().OrderBy(x => x.CreateTime).Where(x => x.UserId == userId).Take(30).ToListAsync();
+            return _mapper.Map<List<TravelGuideDTO>>(list);
         }
 
         public Task<bool> UpdateGuideAsync(Guid userId, string content)

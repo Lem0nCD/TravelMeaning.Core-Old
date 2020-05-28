@@ -11,14 +11,6 @@ using System.Reflection;
 using System.IO;
 using Microsoft.DotNet.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Filters;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Threading.Tasks;
-using TravelMeaning.DAL;
-using TravelMeaning.IDAL;
-using TravelMeaning.BLL;
-using TravelMeaning.IBLL;
 using TravelMeaning.Web.Extensions;
 using AutoMapper;
 
@@ -75,7 +67,7 @@ namespace TravelMeaning.Web
                 options.AddPolicy("LimitRquest", policy =>
                 {
                     policy
-                    .WithOrigins("http://127.0.0.1:8080", "http://localhost:8080")
+                    .WithOrigins("http://127.0.0.1:8080", "http://localhost:8080", "http://127.0.0.1:9528", "http://localhost:9528")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });

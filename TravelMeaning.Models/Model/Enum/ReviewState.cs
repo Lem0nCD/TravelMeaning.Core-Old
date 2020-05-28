@@ -12,7 +12,7 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 审核中
         /// </summary>
-        InReview = 0,
+        Reviewing = 0,
         /// <summary>
         /// 未通过
         /// </summary>
@@ -20,6 +20,6 @@ namespace TravelMeaning.Models.Model
         /// <summary>
         /// 已通过
         /// </summary>
-        Approved
+        Published
     }
 }

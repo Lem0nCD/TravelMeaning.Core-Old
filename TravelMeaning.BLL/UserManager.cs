@@ -10,6 +10,7 @@ using TravelMeaning.IBLL;
 using TravelMeaning.IDAL;
 using TravelMeaning.Models.DTO;
 using TravelMeaning.Models.Model;
+using TravelMeaning.Models.ResponseModels.User;
 
 namespace TravelMeaning.BLL
 {
@@ -18,14 +19,16 @@ namespace TravelMeaning.BLL
         protected readonly IUserService _userSvc;
         protected readonly IRoleService _roleSvc;
         protected readonly IUserRoleService _userRoleSvc;
+        protected readonly ITravelGuideService _guideSvc;
         protected readonly IMapper _mapper;
 
-        public UserManager(IUserService userSvc, IUserRoleService userRoleSvc, IRoleService roleSvc, IMapper mapper)
+        public UserManager(IUserService userSvc, IUserRoleService userRoleSvc, IRoleService roleSvc, IMapper mapper, ITravelGuideService guideSvc)
         {
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
             _userRoleSvc = userRoleSvc ?? throw new ArgumentNullException(nameof(userRoleSvc));
             _roleSvc = roleSvc ?? throw new ArgumentNullException(nameof(roleSvc));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _guideSvc = guideSvc ?? throw new ArgumentNullException(nameof(guideSvc));
         }
         public UserManager(IUserService userSvc)
         {
@@ -88,6 +91,47 @@ namespace TravelMeaning.BLL
         public async Task<User> FindUserByUserName(string username)
         {
             return await _userSvc.GetAll().Where(x => x.Username == username).FirstOrDefaultAsync();
+        }
+
+        public async Task<UserDetailInfoDTO> GetUserDetailInfo(Guid userId)
+        {
+            var user = await _userSvc.GetAll().Where(m => m.Id == userId).FirstOrDefaultAsync();
+            var guideList = await _guideSvc.GetAll().Where(x => x.UserId == userId).ToListAsync();
+            var rolesStr = string.Join(',', await GetUserRoles(userId));
+            var detailInfo = _mapper.Map<UserDetailInfoDTO>(user);
+            foreach (var guide in guideList)
+            {
+                detailInfo.GuideCount ++;
+                detailInfo.GuidesUpVoteCount += guide.UpVoteCount;
+            }
+            detailInfo.RolesStr = rolesStr;
+            return detailInfo;
+        }
+
+        public Task<UserDetailInfoDTO> GetUserDetailInfo(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<LogInModel> Login(Guid userId)
+        {
+            //var rolesStr = string.Join(',', await GetUserRoles(userId));
+            var rolesStr = string.Join(',', await _userRoleSvc.GetRolesByUserId(userId));
+            var user = await _userSvc.GetAll().Where(m => m.Id == userId).FirstOrDefaultAsync();
+            var userinfo = _mapper.Map<LogInModel>(user);
+            userinfo.RolesStr = rolesStr;
+            return userinfo;
+        }
+
+        public async Task<bool> ModifyUserInfo(Guid id, UserInfoDTO userInfo)
+        {
+            var user =await  _userSvc.GetAll().Where(x => x.Id == id).FirstOrDefaultAsync();
+            user.Gender = userInfo.Gender;
+            user.Username = userInfo.Username;
+            user.Location = userInfo.Location;
+            user.Occupation = userInfo.Occupation;
+            user.PhoneNumber = userInfo.PhoneNumber;
+            return await _userSvc.EditAsync(user);
         }
     }
 }

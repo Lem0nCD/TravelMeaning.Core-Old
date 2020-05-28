@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using TravelMeaning.IBLL;
 using TravelMeaning.Models.DTO;
-using TravelMeaning.Models.Model;
 using TravelMeaning.Models.ResponseModels;
 using TravelMeaning.Models.ResponseModels.User;
 using TravelMeaning.Models.ViewModels.User;
@@ -12,50 +11,56 @@ using TravelMeaning.Web.Auth;
 
 namespace TravelMeaning.Web.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    [Consumes("application/json")]
     public class UserController : ControllerBase
     {
         private readonly IUserManager _userManager;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public UserController(IUserManager userManager)
+        public UserController(IUserManager userManager, IHttpContextAccessor httpContext)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
         }
 
-        [HttpPost]
+        [Consumes("application/json")]
+        [HttpPost(nameof(Login))]
         public async Task<ResponseModel<LogInModel>> Login(LoginViewModel viewModel)
         {
-            var user = await _userManager.Login(viewModel.Username, viewModel.Password);
             var responseModel = new ResponseModel<LogInModel>
             {
                 Data = new LogInModel(),
             };
-
-            if (user != null)
+            if (!string.IsNullOrEmpty(viewModel.Username) || !string.IsNullOrEmpty(viewModel.Password))
             {
-                responseModel.Code = StateCode.Sucess;
-                var uesrInfo = await _userManager.GetUserInfo(user.Id);
-                responseModel.Data.UserInfo = uesrInfo;
-                CustomPayloadModel tokenModel = new CustomPayloadModel
+                var user = await _userManager.Login(viewModel.Username, viewModel.Password);
+                if (user != null)
                 {
-                    Id = user.Id,
-                    Roles = uesrInfo.RolesStr
-                };
-                responseModel.Data.Token = JWTHelper.IssueJWT(tokenModel);
+                    responseModel.Code = StateCode.Sucess;
+                    var uesrInfo = await _userManager.Login(user.Id);
+                    responseModel.Data = uesrInfo;
+                    CustomPayloadModel tokenModel = new CustomPayloadModel
+                    {
+                        Id = user.Id,
+                        Roles = uesrInfo.RolesStr
+                    };
+                    responseModel.Data.Token = JWTHelper.IssueJWT(tokenModel);
 
+                }
             }
+
             return responseModel;
         }
         [HttpPost]
-        public async Task<ResponseModel<SignUpModel>> SignUp(SignUpViewModel viewModel)
+        [Consumes("application/json")]
+        public async Task<ResponseModel<GenericModel>> Post(SignUpViewModel viewModel)
         {
-            var responseModel = new ResponseModel<SignUpModel>
+            var responseModel = new ResponseModel<GenericModel>
             {
                 Code = StateCode.Sucess,
-                Data = new SignUpModel
+                Data = new GenericModel
                 {
                     IsSucess = false,
                     Message = string.Empty
@@ -69,20 +74,48 @@ namespace TravelMeaning.Web.Controllers
             return responseModel;
         }
 
-        [HttpGet]
-        public async Task<ResponseModel<UserInfoDTO>> GetUserInfoById(string userId)
+        [HttpGet()]
+        public async Task<ResponseModel<UserInfoDTO>> Get(string id)
         {
             var responseModel = new ResponseModel<UserInfoDTO>
             {
                 Data = null
             };
-            if (!Guid.TryParse(userId, out Guid id))
+            if (!Guid.TryParse(id, out Guid UserId))
             {
                 return responseModel;
             }
-            var userinfo = await _userManager.GetUserInfo(id);
+            var userinfo = await _userManager.GetUserInfo(UserId);
             responseModel.Code = StateCode.Sucess;
             responseModel.Data = userinfo;
+            return responseModel;
+        }
+
+        [HttpGet(nameof(GetUserDetailInfoById))]
+        public async Task<ResponseModel<UserDetailInfoDTO>> GetUserDetailInfoById(string id)
+        {
+            var responseModel = new ResponseModel<UserDetailInfoDTO>
+            {
+                Data = null
+            };
+            if (!Guid.TryParse(id, out Guid userId))
+            {
+                return responseModel;
+            }
+            var userinfo = await _userManager.GetUserDetailInfo(userId);
+            responseModel.Code = StateCode.Sucess;
+            responseModel.Data = userinfo;
+            return responseModel;
+        }
+        [HttpPost(nameof(ModifyUserInfo))]
+        public async Task<ResponseModel<GenericModel>> ModifyUserInfo(UserInfoDTO viewModel)
+        {
+            var responseModel = new ResponseModel<GenericModel>
+            {
+                Data = new GenericModel()
+            };
+            var userId = JWTHelper.SeriallzeJwt(((string)_httpContext.HttpContext.Request.Headers["Authorization"]).Replace("Bearer ", string.Empty)).Id;
+            responseModel.Data.IsSucess = await _userManager.ModifyUserInfo(userId, viewModel);
             return responseModel;
         }
     }
