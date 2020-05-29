@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TravelMeaning.Models.ViewModels.GuideReview
+﻿namespace TravelMeaning.Models.ViewModels.Review
 {
     public class ModifyNoteViewModel
     {

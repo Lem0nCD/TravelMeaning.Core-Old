@@ -22,6 +22,8 @@ namespace TravelMeaning.Web.Extensions
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ITravelGuideReviewManager, TravelGuideReviewManager>();
             services.AddScoped<ITravelGuideReviewService, TravelGuideReviewService>();
+            services.AddScoped<ICommentReviewManager, CommentReviewManager>();
+            services.AddScoped<ICommentReviewService, CommentReviewService>();
         }
         public static void AddHttpContextService(this IServiceCollection services)
         {

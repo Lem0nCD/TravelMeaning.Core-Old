@@ -4,6 +4,51 @@
         <name>TravelMeaning.Models</name>
     </assembly>
     <members>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.TravelGuideId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.CommentId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.UserId">
+            <summary>
+            作者外键
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.Username">
+            <summary>
+            作者名
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.Content">
+            <summary>
+            正文 markdown
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.UpVoteCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.State">
+            <summary>
+            审核状态
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.Note">
+            <summary>
+            审核信息
+            </summary>
+        </member>
+        <member name="P:TravelMeaning.Models.DTO.CommentReviewDTO.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
         <member name="P:TravelMeaning.Models.DTO.GuideCommentDTO.UserId">
             <summary>
             用户ID

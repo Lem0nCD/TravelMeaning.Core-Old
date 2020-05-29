@@ -20,10 +20,11 @@ namespace TravelMeaning.Web.Controllers
     {
         private readonly ICommentManager _commentManger;
         private readonly IHttpContextAccessor _httpContext;
-
-        public CommentController(ICommentManager commentManger, IHttpContextAccessor httpContext)
+        private readonly ICommentReviewManager _commentReviewManager;
+        public CommentController(ICommentManager commentManger, IHttpContextAccessor httpContext, ICommentReviewManager commentReviewManager)
         {
             _commentManger = commentManger ?? throw new ArgumentNullException(nameof(commentManger));
+            _commentReviewManager = commentReviewManager ?? throw new ArgumentNullException(nameof(commentReviewManager));
             _httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
         }
 
@@ -69,7 +70,8 @@ namespace TravelMeaning.Web.Controllers
             var responseModel = new ResponseModel<GenericModel>();
             if (Guid.TryParse(viewModel.GuideId, out Guid guideId) && userId != Guid.Empty)
             {
-                await _commentManger.CreateComment(userId, guideId, viewModel.Content);
+                Guid commentId = await _commentManger.CreateComment(userId, guideId, viewModel.Content);
+                await _commentReviewManager.CreateCommentReview(commentId);
                 responseModel.Code = StateCode.Sucess;
                 responseModel.Data = new GenericModel
                 {

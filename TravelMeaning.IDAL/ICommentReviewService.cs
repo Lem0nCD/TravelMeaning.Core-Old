@@ -1,6 +1,8 @@
-﻿namespace TravelMeaning.IDAL
+﻿using TravelMeaning.Models.Model;
+
+namespace TravelMeaning.IDAL
 {
-    public interface ICommentReviewService
+    public interface ICommentReviewService : IBaseService<CommentReview>
     {
     }
 }

@@ -15,13 +15,13 @@ namespace TravelMeaning.BLL
     {
         protected readonly IMapper _mapper;
         protected readonly ITravelGuideService _travelGuideSvc;
-        protected readonly ITravelGuideReviewService _reviewService;
+        protected readonly ITravelGuideReviewService _guideReviewService;
 
         public TravelGuideReviewManager(IMapper mapper, ITravelGuideService travelGuideSvc, ITravelGuideReviewService reviewService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _travelGuideSvc = travelGuideSvc ?? throw new ArgumentNullException(nameof(travelGuideSvc));
-            _reviewService = reviewService ?? throw new ArgumentNullException(nameof(reviewService));
+            _guideReviewService = reviewService ?? throw new ArgumentNullException(nameof(reviewService));
         }
 
         public async Task<bool> CreateGuideReview(Guid guideId)
@@ -30,7 +30,7 @@ namespace TravelMeaning.BLL
             {
                 TravelGuideId = guideId,
             };
-            return await _reviewService.CreateAsync(guideReview);
+            return await _guideReviewService.CreateAsync(guideReview);
         }
 
         public async Task<List<GuideReviewDTO>> GetAllGuideReview(int page, int size)
@@ -40,38 +40,43 @@ namespace TravelMeaning.BLL
             return _mapper.Map<List<GuideReviewDTO>>(list);
         }
 
-        public async Task<List<GuideReviewDTO>> GetAllGuideReviewByState(int page, int size,ReviewState state)
+        public async Task<List<GuideReviewDTO>> GetAllGuideReviewByState(int page, int size, ReviewState state)
         {
             var list = await _travelGuideSvc.GetAll().Include(x => x.TravelGuideReview).Where(x => x.TravelGuideReview.State == state).Include(x => x.User).Skip(page).Take(size).ToListAsync();
             return _mapper.Map<List<GuideReviewDTO>>(list);
         }
 
+        public async Task<int> GetAllGuideReviewCount()
+        {
+            return await _travelGuideSvc.GetAll().CountAsync();
+        }
+
         public async Task<bool> ModiflyNoteByGuideId(Guid guideId, string content)
         {
-            var review = _reviewService.GetAll().Where(x => x.TravelGuideId == guideId).FirstOrDefault();
+            var review = _guideReviewService.GetAll().Where(x => x.TravelGuideId == guideId).FirstOrDefault();
             review.Note = content;
-            return await _reviewService.EditAsync(review);
+            return await _guideReviewService.EditAsync(review);
         }
 
         public async Task<bool> ModiflyNoteById(Guid id, string content)
         {
-            var review = await _reviewService.GetOneByIdAsync(id);
+            var review = await _guideReviewService.GetOneByIdAsync(id);
             review.Note = content;
-            return await _reviewService.EditAsync(review);
+            return await _guideReviewService.EditAsync(review);
         }
 
-        public async Task<bool> ModifyReviewStateByGuideId(Guid guideId, ReviewState state, string note = "")
+        public async Task<bool> ModifyReviewStateByGuideId(Guid guideId, ReviewState state)
         {
-            var guideReview = await _reviewService.GetAll().Where(x => x.TravelGuideId == guideId).FirstOrDefaultAsync();
+            var guideReview = await _guideReviewService.GetAll().Where(x => x.TravelGuideId == guideId).FirstOrDefaultAsync();
             guideReview.State = state;
-            return await _reviewService.EditAsync(guideReview);
+            return await _guideReviewService.EditAsync(guideReview);
         }
 
-        public async Task<bool> ModifyReviewStateById(Guid id, ReviewState state, string note = "")
+        public async Task<bool> ModifyReviewStateById(Guid id, ReviewState state)
         {
-            var guideReview = await _reviewService.GetAll().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var guideReview = await _guideReviewService.GetAll().Where(x => x.Id == id).FirstOrDefaultAsync();
             guideReview.State = state;
-            return await _reviewService.EditAsync(guideReview);
+            return await _guideReviewService.EditAsync(guideReview);
         }
     }
 }
