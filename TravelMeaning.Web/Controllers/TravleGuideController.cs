@@ -67,7 +67,7 @@ namespace TravelMeaning.Web.Controllers
         public async Task<ResponseModel<CreatedGuideModel>> Post(CreateGuideViewModel viewModel)
         {
             var responseModel = new ResponseModel<CreatedGuideModel>();
-            var userId = JWTHelper.SeriallzeJwt(((string)_httpContext.HttpContext.Request.Headers["Authorization"]).Replace("Bearer ", string.Empty)).Id;
+            Guid userId = JWTHelper.SeriallzeUserId(_httpContext);
             var guiideId = await _guideManager.CreateGuideAsync(userId, viewModel.Content, viewModel.Title, viewModel.CoverImageUrl);
             if (guiideId != Guid.Empty)
             {

@@ -20,13 +20,9 @@ namespace TravelMeaning.Models.Model
         public Guid FromUserId { get; set; }
         public User FromUser { get; set; }
         /// <summary>
-        /// 添加者关系类型
+        /// 关系类型
         /// </summary>
-        public RelationshipType ToUserType { get; set; }
-        /// <summary>
-        /// 被添加者关系类型
-        /// </summary>
-        public RelationshipType FromUserType { get; set; }
+        public RelationshipType Type { get; set; } = RelationshipType.Detachment;
 
     }
 }

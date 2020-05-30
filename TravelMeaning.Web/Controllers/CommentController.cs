@@ -66,7 +66,7 @@ namespace TravelMeaning.Web.Controllers
         [Authorize(policy:"UserV1")]
         public async Task<ResponseModel<GenericModel>> ReplyGuide(CreateCommentViewModel viewModel)
         {
-            var userId = JWTHelper.SeriallzeJwt(((string)_httpContext.HttpContext.Request.Headers["Authorization"]).Replace("Bearer ", string.Empty)).Id;
+            Guid userId = JWTHelper.SeriallzeUserId(_httpContext);
             var responseModel = new ResponseModel<GenericModel>();
             if (Guid.TryParse(viewModel.GuideId, out Guid guideId) && userId != Guid.Empty)
             {

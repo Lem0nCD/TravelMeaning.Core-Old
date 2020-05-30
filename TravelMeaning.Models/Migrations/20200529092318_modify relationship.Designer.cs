@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelMeaning.Models.Data;
 
 namespace TravelMeaning.Models.Migrations
 {
     [DbContext(typeof(TMContext))]
-    partial class TMContextModelSnapshot : ModelSnapshot
+    [Migration("20200529092318_modify relationship")]
+    partial class modifyrelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -571,15 +573,15 @@ namespace TravelMeaning.Models.Migrations
             modelBuilder.Entity("TravelMeaning.Models.Model.RelationShip", b =>
                 {
                     b.HasOne("TravelMeaning.Models.Model.User", "FromUser")
-                        .WithMany("RelationShips")
+                        .WithMany("FromRelationShips")
                         .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TravelMeaning.Models.Model.User", "ToUser")
-                        .WithMany()
+                        .WithMany("ToRelationShips")
                         .HasForeignKey("ToUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

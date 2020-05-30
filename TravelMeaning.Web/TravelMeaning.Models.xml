@@ -239,6 +239,11 @@
             评论总数
             </summary>
         </member>
+        <member name="P:TravelMeaning.Models.DTO.UserDetailInfoDTO.Type">
+            <summary>
+            关系
+            </summary>
+        </member>
         <member name="P:TravelMeaning.Models.DTO.UserInfoCommentDTO.Title">
             <summary>
             文章标题
@@ -529,14 +534,9 @@
             发送消息用户外键
             </summary>
         </member>
-        <member name="P:TravelMeaning.Models.Model.RelationShip.ToUserType">
+        <member name="P:TravelMeaning.Models.Model.RelationShip.Type">
             <summary>
-            添加者关系类型
-            </summary>
-        </member>
-        <member name="P:TravelMeaning.Models.Model.RelationShip.FromUserType">
-            <summary>
-            被添加者关系类型
+            关系类型
             </summary>
         </member>
         <member name="T:TravelMeaning.Models.Model.Role">

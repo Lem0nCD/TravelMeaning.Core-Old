@@ -6,7 +6,8 @@ namespace TravelMeaning.Models.Model
 {
     public enum RelationshipType
     {
-        Follow = 0,
+        Detachment = 0,
+        Follow,
         Block
     }
 }

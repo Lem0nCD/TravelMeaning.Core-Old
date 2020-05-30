@@ -52,6 +52,10 @@ namespace TravelMeaning.Models.DTO
         /// 评论总数
         /// </summary>
         public int CommentCount { get; set; }
+        /// <summary>
+        /// 关系
+        /// </summary>
+        public RelationshipType Type { get; set; }
     }
 }
 

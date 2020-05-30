@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using TravelMeaning.IBLL;
 using TravelMeaning.Models.DTO;
+using TravelMeaning.Models.Model;
 using TravelMeaning.Models.ResponseModels;
 using TravelMeaning.Models.ResponseModels.User;
 using TravelMeaning.Models.ViewModels.User;
@@ -18,10 +19,12 @@ namespace TravelMeaning.Web.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly IRelationShipManager _relationShipManager;
 
-        public UserController(IUserManager userManager, IHttpContextAccessor httpContext)
+        public UserController(IUserManager userManager, IHttpContextAccessor httpContext, IRelationShipManager relationShipManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _relationShipManager = relationShipManager ?? throw new ArgumentNullException(nameof(relationShipManager));
             _httpContext = httpContext ?? throw new ArgumentNullException(nameof(httpContext));
         }
 
@@ -94,17 +97,23 @@ namespace TravelMeaning.Web.Controllers
         [HttpGet(nameof(GetUserDetailInfoById))]
         public async Task<ResponseModel<UserDetailInfoDTO>> GetUserDetailInfoById(string id)
         {
+            Guid responseUserId = JWTHelper.SeriallzeUserId(_httpContext);
+            RelationshipType type = RelationshipType.Detachment;
             var responseModel = new ResponseModel<UserDetailInfoDTO>
             {
                 Data = null
             };
-            if (!Guid.TryParse(id, out Guid userId))
+            if (Guid.TryParse(id, out Guid userId))
             {
-                return responseModel;
+                var userinfo = await _userManager.GetUserDetailInfo(userId);
+                if (userId != Guid.Empty)
+                {
+                    type = await _relationShipManager.GetRelationshipType(responseUserId, userId);
+                }
+                responseModel.Data = userinfo;
+                responseModel.Code = StateCode.Sucess;
+                responseModel.Data.Type = type;
             }
-            var userinfo = await _userManager.GetUserDetailInfo(userId);
-            responseModel.Code = StateCode.Sucess;
-            responseModel.Data = userinfo;
             return responseModel;
         }
         [HttpPost(nameof(ModifyUserInfo))]
@@ -114,7 +123,7 @@ namespace TravelMeaning.Web.Controllers
             {
                 Data = new GenericModel()
             };
-            var userId = JWTHelper.SeriallzeJwt(((string)_httpContext.HttpContext.Request.Headers["Authorization"]).Replace("Bearer ", string.Empty)).Id;
+            Guid userId = JWTHelper.SeriallzeUserId(_httpContext);
             responseModel.Data.IsSucess = await _userManager.ModifyUserInfo(userId, viewModel);
             return responseModel;
         }

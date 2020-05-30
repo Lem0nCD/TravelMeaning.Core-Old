@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -60,6 +61,16 @@ namespace TravelMeaning.Web.Auth
                 Roles = role != null ? role.ToString() : string.Empty,
             };
             return model;
+        }
+        public static Guid SeriallzeUserId(IHttpContextAccessor httpContext)
+        {
+            string authStr = (string)httpContext.HttpContext.Request.Headers["Authorization"];
+            if (!string.IsNullOrWhiteSpace(authStr))
+            {
+                var payload = SeriallzeJwt(authStr.Replace("Bearer ", string.Empty));
+                return payload.Id;
+            }
+            return Guid.Empty;
         }
     }
 }

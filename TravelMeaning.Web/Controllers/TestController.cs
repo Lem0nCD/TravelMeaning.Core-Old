@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -99,6 +100,14 @@ namespace TravelMeaning.Web.Controllers
         {
             Console.WriteLine(viewModel.Content);
             return Ok(new { data = viewModel.Content });
+        }
+
+        [HttpGet("[action]")]
+        public async Task<HttpContent> BaiduApi()
+        {
+            HttpClient client = new HttpClient();
+            var result = await client.GetAsync("http://api.map.baidu.com/place/v2/search?query=ATM机&tag=银行&region=北京&output=json&ak=2IEbVc6uPkna2XcGPlXE2QdAUHcrMzZC");
+            return result.Content;
         }
     }
 }
