@@ -53,6 +53,11 @@ namespace TravelMeaning.Models.Data
                 x.HasOne(x => x.User).WithMany(x => x.Favorites).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
             });
 
+            modelBuilder.Entity<GuideRoute>(x =>
+            {
+                x.HasOne(x => x.TravelGuide).WithOne(x => x.GuideRoute).HasForeignKey<GuideRoute>(x => x.TravelGuideId).OnDelete(DeleteBehavior.Restrict);
+            });
+
             modelBuilder.Entity<Message>(x =>
             {
                 x.HasOne(x => x.ToUser).WithMany(x => x.ToUserMessages).HasForeignKey(x => x.ToUserId).OnDelete(DeleteBehavior.Restrict);
@@ -109,6 +114,7 @@ namespace TravelMeaning.Models.Data
         public DbSet<CommentReview> CommentReviews { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<GuideRoute> GuideRoutes { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<RelationShip> RelationShips { get; set; }
         public DbSet<Role> Roles { get; set; }

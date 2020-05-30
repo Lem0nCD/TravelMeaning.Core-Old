@@ -15,12 +15,15 @@ namespace TravelMeaning.BLL
     public class TravelGuideManager : ITravelGuideManager
     {
         protected readonly ITravelGuideService _travelGuideSvc;
+        protected readonly IGuideRouteService _guideRouteSvc;
+
         protected readonly IUserService _userSvc;
         protected readonly IMapper _mapper;
 
-        public TravelGuideManager(ITravelGuideService travelGuideSvc, IMapper mapper, IUserService userSvc)
+        public TravelGuideManager(ITravelGuideService travelGuideSvc, IMapper mapper, IUserService userSvc, IGuideRouteService guideRouteSvc)
         {
             _travelGuideSvc = travelGuideSvc ?? throw new ArgumentNullException(nameof(travelGuideSvc));
+            _guideRouteSvc = guideRouteSvc ?? throw new ArgumentNullException(nameof(guideRouteSvc));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
         }

@@ -36,5 +36,6 @@ namespace TravelMeaning.Models.Model
         public int ViewedCount { get; set; } = 0;
         public ICollection<Comment> Comments { get; set; }
         public TravelGuideReview TravelGuideReview { get; set; }
+        public GuideRoute GuideRoute { get; set; }
     }
 }
